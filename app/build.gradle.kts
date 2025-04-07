@@ -6,6 +6,10 @@ android {
     namespace = "edu.sjsu.android.group4trippytrips"
     compileSdk = 35
 
+    buildFeatures{
+        viewBinding = true
+    }
+
     defaultConfig {
         applicationId = "edu.sjsu.android.group4trippytrips"
         minSdk = 24
