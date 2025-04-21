@@ -16,7 +16,7 @@
             android:name=".LoginProvider"
             android:authorities="edu.sjsu.android.group4trippytrips"
             android:enabled="true"
-            android:exported="true"></provider>
+            android:exported="true" />
 
         <activity
             android:name=".MainActivity"

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Group4TrippyTrips</string>
+    <string name="app_name">Trippy Trips</string>
     <string name="welcome_text">Welcome to\n\nTrippy Trips!</string>
     <string name="welcome_instructions">Please log in or sign up to get started!</string>
     <string name="log_in">LOG IN</string>

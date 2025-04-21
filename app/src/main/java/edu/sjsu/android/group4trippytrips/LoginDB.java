@@ -39,19 +39,9 @@ public class LoginDB extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public long insert(ContentValues contentValues){
+    public long insert(ContentValues contentValues) {
         SQLiteDatabase database = getWritableDatabase();
         return database.insert(TABLE_NAME, null, contentValues);
-    }
-
-    public Cursor getAllLogin(){
-        SQLiteDatabase db = getWritableDatabase();
-        return db.query(TABLE_NAME, null, null, null, null, null, null);
-    }
-
-    public int deleteAllLogin(){
-        SQLiteDatabase db = getWritableDatabase();
-        return db.delete(TABLE_NAME, null, null);
     }
 
     public Cursor getAccount(String username, String password){
