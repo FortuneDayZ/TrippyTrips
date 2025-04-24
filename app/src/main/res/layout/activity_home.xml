@@ -77,7 +77,6 @@
             android:inputType="none"
             android:hint="Select date"
             android:drawableEnd="@android:drawable/ic_menu_my_calendar"
-            android:background="@drawable/edittext_background"
             android:padding="12dp"
             android:layout_marginEnd="8dp" />
 
@@ -91,7 +90,6 @@
             android:inputType="none"
             android:hint="Travelers"
             android:drawableEnd="@android:drawable/ic_menu_manage"
-            android:background="@drawable/edittext_background"
             android:padding="12dp"
             android:layout_marginStart="8dp" />
     </LinearLayout>
@@ -114,7 +112,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Hotels"
-            android:drawableTop="@drawable/ic_hotel"
             android:layout_marginEnd="8dp"/>
 
         <Button
@@ -122,7 +119,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Flights"
-            android:drawableTop="@drawable/ic_flight"
             android:layout_marginHorizontal="8dp"/>
 
         <Button
@@ -130,7 +126,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Activities"
-            android:drawableTop="@drawable/ic_location"
             android:layout_marginStart="8dp"/>
     </LinearLayout>
 
@@ -200,7 +195,6 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@android:color/white"
-        app:menu="@menu/bottom_nav_menu"
         app:itemIconTint="@color/black"
         app:itemTextColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
