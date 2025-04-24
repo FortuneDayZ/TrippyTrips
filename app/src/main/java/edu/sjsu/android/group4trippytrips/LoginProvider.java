@@ -13,17 +13,17 @@ import java.util.Objects;
 
 public class LoginProvider extends ContentProvider {
 
-    LoginDB db;
+    AppDB db;
 
     @Override
     public boolean onCreate() {
-        db = new LoginDB(getContext());
+        db = new AppDB(getContext());
         return true;
     }
 
     @Override
     public Uri insert(@NonNull Uri uri, ContentValues values) {
-        long rowID = db.insert(values);
+        long rowID = db.insertLogin(values);
         // If record is added successfully
         if (rowID > 0) {
             Uri _uri = ContentUris.withAppendedId(uri, rowID);
