@@ -45,15 +45,16 @@ public class LoginProvider extends ContentProvider {
         return db.deleteAccount(selection);
     }
 
-    @Override
-    public String getType(@NonNull Uri uri) {
-        // at the given URI.
-        throw new UnsupportedOperationException("Not yet implemented");
-    }
-
+    // TODO: Implement this
     @Override
     public int update(@NonNull Uri uri, ContentValues values, String selection,
                       String[] selectionArgs) {
+        return db.changePassword(values, selection);
+    }
+
+    @Override
+    public String getType(@NonNull Uri uri) {
+        // at the given URI.
         throw new UnsupportedOperationException("Not yet implemented");
     }
 }

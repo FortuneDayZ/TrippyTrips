@@ -73,6 +73,12 @@ public class AppDB extends SQLiteOpenHelper {
         return db.delete(LOGIN_TABLE_NAME, where, null);
     }
 
+    public int changePassword(ContentValues values, String username){
+        String where = String.format("username=%s", username);
+        SQLiteDatabase db = getWritableDatabase();
+        return db.update(LOGIN_TABLE_NAME, values, where, null);
+    }
+
     public long insertLocation(ContentValues contentValues){
         SQLiteDatabase database = getWritableDatabase();
         return database.insert(LOGIN_TABLE_NAME, null, contentValues);
