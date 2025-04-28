@@ -6,7 +6,7 @@ android {
     namespace = "edu.sjsu.android.group4trippytrips"
     compileSdk = 35
 
-    buildFeatures{
+    buildFeatures {
         viewBinding = true
     }
 
@@ -29,6 +29,7 @@ android {
             )
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
@@ -36,11 +37,12 @@ android {
 }
 
 dependencies {
-
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
     implementation(libs.constraintlayout)
+    implementation(libs.navigation.fragment)   // add Navigation Fragment
+    implementation(libs.navigation.ui)         // add Navigation UI
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)

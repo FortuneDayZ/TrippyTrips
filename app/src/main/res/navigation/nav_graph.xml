@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/welcomePage">
+
+    <fragment
+        android:id="@+id/welcomePage"
+        android:name="edu.sjsu.android.group4trippytrips.WelcomePage"
+        android:label="Welcome Page">
+        <action
+            android:id="@+id/action_welcomePage_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_welcomePage_to_signUpFragment"
+            app:destination="@id/signUpFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="edu.sjsu.android.group4trippytrips.LoginFragment"
+        android:label="Login Page">
+        <action
+            android:id="@+id/action_loginFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/signUpFragment"
+        android:name="edu.sjsu.android.group4trippytrips.SignUpFragment"
+        android:label="Sign Up Page">
+        <action
+            android:id="@+id/action_signUpFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="edu.sjsu.android.group4trippytrips.HomeFragment"
+        android:label="Home Page">
+        <action
+            android:id="@+id/action_homeFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_searchResultsFragment"
+            app:destination="@id/searchResultsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="edu.sjsu.android.group4trippytrips.SettingsFragment"
+        android:label="Settings Page" />
+
+    <fragment
+        android:id="@+id/searchResultsFragment"
+        android:name="edu.sjsu.android.group4trippytrips.SearchResultsFragment"
+        android:label="Search Results Page">
+        <action
+            android:id="@+id/action_searchResultsFragment_to_addedItemsFragment"
+            app:destination="@id/addedItemsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/addedItemsFragment"
+        android:name="edu.sjsu.android.group4trippytrips.AddedItemsFragment"
+        android:label="Added Items Page" />
+</navigation>
