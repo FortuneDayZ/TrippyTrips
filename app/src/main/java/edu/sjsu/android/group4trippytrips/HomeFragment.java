@@ -5,6 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 public class HomeFragment extends Fragment {
@@ -20,27 +22,29 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
+        // Connect buttons
         hotelsButton = view.findViewById(R.id.hotelsButton);
         flightsButton = view.findViewById(R.id.flightsButton);
         activitiesButton = view.findViewById(R.id.activitiesButton);
 
+        // Set button click listeners
         hotelsButton.setOnClickListener(v -> selectCategory(hotelsButton));
         flightsButton.setOnClickListener(v -> selectCategory(flightsButton));
         activitiesButton.setOnClickListener(v -> selectCategory(activitiesButton));
 
-        // OPTIONAL: Make Hotels selected by default
+        // Optional: Select Hotels by default at start
         selectCategory(hotelsButton);
 
         return view;
     }
 
     private void selectCategory(Button selectedButton) {
-        // Reset all to normal style
-        hotelsButton.setBackgroundColor(getResources().getColor(android.R.color.darker_gray));
-        flightsButton.setBackgroundColor(getResources().getColor(android.R.color.darker_gray));
-        activitiesButton.setBackgroundColor(getResources().getColor(android.R.color.darker_gray));
+        // Reset all buttons to normal
+        hotelsButton.setBackgroundResource(R.drawable.category_button_background);
+        flightsButton.setBackgroundResource(R.drawable.category_button_background);
+        activitiesButton.setBackgroundResource(R.drawable.category_button_background);
 
-        // Highlight only the selected one
-        selectedButton.setBackgroundColor(getResources().getColor(android.R.color.holo_blue_light));
+        // Set the selected one to special "selected" background
+        selectedButton.setBackgroundResource(R.drawable.category_button_selected);
     }
 }
