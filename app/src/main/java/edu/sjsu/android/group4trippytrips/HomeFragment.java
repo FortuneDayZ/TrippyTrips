@@ -55,14 +55,18 @@ public class HomeFragment extends Fragment {
     }
 
     private void selectCategory(Button selectedButton) {
-        // Reset all buttons to normal
-        hotelsButton.setBackgroundResource(R.drawable.category_button_background);
-        flightsButton.setBackgroundResource(R.drawable.category_button_background);
-        activitiesButton.setBackgroundResource(R.drawable.category_button_background);
+        Button[] buttons = {hotelsButton, flightsButton, activitiesButton};
 
-        // Highlight selected button
-        selectedButton.setBackgroundResource(R.drawable.category_button_selected);
+        for (Button btn : buttons) {
+            btn.setSelected(false);
+            btn.setTextColor(getResources().getColor(android.R.color.black));
+            btn.setBackgroundResource(R.drawable.category_button_selector);
+        }
+
+        selectedButton.setSelected(true);
+        selectedButton.setTextColor(getResources().getColor(android.R.color.white));
     }
+
 
     private void showTravelerPicker() {
         NumberPicker numberPicker = new NumberPicker(requireContext());
