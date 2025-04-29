@@ -8,7 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.NumberPicker;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
@@ -20,7 +22,7 @@ public class HomeFragment extends Fragment {
     private EditText editTravelers, editDate;
 
     public HomeFragment() {
-        // Required empty constructor
+        // Required empty public constructor
     }
 
     @Override
@@ -42,14 +44,19 @@ public class HomeFragment extends Fragment {
         flightsButton.setOnClickListener(v -> selectCategory(flightsButton));
         activitiesButton.setOnClickListener(v -> selectCategory(activitiesButton));
 
-        // Set travelers field click listener
         editTravelers.setOnClickListener(v -> showTravelerPicker());
-
-        // Set date field click listener
         editDate.setOnClickListener(v -> showDatePicker());
 
-        // Optional: Select Hotels by default at start
-        selectCategory(hotelsButton);
+        selectCategory(hotelsButton); // Default selection
+
+        // Connect popular category layouts
+        LinearLayout beachTrips = view.findViewById(R.id.beachTripsLayout);
+        LinearLayout cityTours = view.findViewById(R.id.cityToursLayout);
+        LinearLayout adventure = view.findViewById(R.id.adventureLayout);
+
+        beachTrips.setOnClickListener(v -> Toast.makeText(getContext(), "Beach Trips clicked!", Toast.LENGTH_SHORT).show());
+        cityTours.setOnClickListener(v -> Toast.makeText(getContext(), "City Tours clicked!", Toast.LENGTH_SHORT).show());
+        adventure.setOnClickListener(v -> Toast.makeText(getContext(), "Adventure clicked!", Toast.LENGTH_SHORT).show());
 
         return view;
     }
@@ -67,7 +74,6 @@ public class HomeFragment extends Fragment {
         selectedButton.setTextColor(getResources().getColor(android.R.color.white));
     }
 
-
     private void showTravelerPicker() {
         NumberPicker numberPicker = new NumberPicker(requireContext());
         numberPicker.setMinValue(1);
@@ -82,7 +88,6 @@ public class HomeFragment extends Fragment {
             editTravelers.setText(selectedValue + " Traveler" + (selectedValue > 1 ? "s" : ""));
         });
         builder.setNegativeButton("Cancel", null);
-
         builder.show();
     }
 
@@ -94,7 +99,6 @@ public class HomeFragment extends Fragment {
 
         DatePickerDialog datePickerDialog = new DatePickerDialog(requireContext(),
                 (view, selectedYear, selectedMonth, selectedDay) -> {
-                    // Month is 0-based, so add 1
                     String date = (selectedMonth + 1) + "/" + selectedDay + "/" + selectedYear;
                     editDate.setText(date);
                 }, year, month, day);
