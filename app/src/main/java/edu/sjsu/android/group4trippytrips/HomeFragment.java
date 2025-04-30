@@ -11,10 +11,12 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 import android.widget.Toast;
-import android.graphics.drawable.Drawable;
 
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.Calendar;
 
@@ -35,7 +37,6 @@ public class HomeFragment extends Fragment {
         hotelsButton = view.findViewById(R.id.hotelsButton);
         flightsButton = view.findViewById(R.id.flightsButton);
         activitiesButton = view.findViewById(R.id.activitiesButton);
-
         editTravelers = view.findViewById(R.id.editTravelers);
         editDate = view.findViewById(R.id.editDate);
 
@@ -55,6 +56,28 @@ public class HomeFragment extends Fragment {
         beachTrips.setOnClickListener(v -> Toast.makeText(getContext(), "Beach Trips clicked!", Toast.LENGTH_SHORT).show());
         cityTours.setOnClickListener(v -> Toast.makeText(getContext(), "City Tours clicked!", Toast.LENGTH_SHORT).show());
         adventure.setOnClickListener(v -> Toast.makeText(getContext(), "Adventure clicked!", Toast.LENGTH_SHORT).show());
+
+        // ✅ Bottom Navigation logic using if-else instead of switch
+        BottomNavigationView bottomNavigation = view.findViewById(R.id.bottom_navigation);
+        bottomNavigation.setOnItemSelectedListener(item -> {
+            int itemId = item.getItemId();
+            if (itemId == R.id.homeFragment) {
+                return true; // Already here
+            } else if (itemId == R.id.exploreFragment) {
+                NavHostFragment.findNavController(HomeFragment.this)
+                        .navigate(R.id.exploreFragment);
+                return true;
+            } else if (itemId == R.id.bookingsFragment) {
+                NavHostFragment.findNavController(HomeFragment.this)
+                        .navigate(R.id.bookingsFragment);
+                return true;
+            } else if (itemId == R.id.profileFragment) {
+                NavHostFragment.findNavController(HomeFragment.this)
+                        .navigate(R.id.profileFragment);
+                return true;
+            }
+            return false;
+        });
 
         return view;
     }
