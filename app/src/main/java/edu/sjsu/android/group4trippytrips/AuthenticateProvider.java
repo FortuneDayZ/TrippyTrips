@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 
 import java.util.Objects;
 
-public class LoginProvider extends ContentProvider {
+public class AuthenticateProvider extends ContentProvider {
 
     AppDB db;
 

@@ -9,9 +9,9 @@ import android.widget.Button;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
-public class LoginFragment extends Fragment {
+public class AuthenticateFragment extends Fragment {
 
-    public LoginFragment() {
+    public AuthenticateFragment() {
         // Required empty public constructor
     }
 
@@ -24,7 +24,7 @@ public class LoginFragment extends Fragment {
         // TEMPORARY: Button to skip to HomeFragment
         Button tempButtonGoHome = view.findViewById(R.id.tempButtonGoHome);
         tempButtonGoHome.setOnClickListener(v ->
-                NavHostFragment.findNavController(LoginFragment.this)
+                NavHostFragment.findNavController(AuthenticateFragment.this)
                         .navigate(R.id.action_loginFragment_to_homeFragment)
         );
 

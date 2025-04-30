@@ -38,7 +38,7 @@
             android:exported="false" />
 
         <provider
-            android:name=".LoginProvider"
+            android:name=".AuthenticateProvider"
             android:authorities="edu.sjsu.android.group4trippytrips"
             android:enabled="true"
             android:exported="true" />

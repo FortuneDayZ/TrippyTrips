@@ -15,7 +15,7 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="edu.sjsu.android.group4trippytrips.LoginFragment"
+        android:name="edu.sjsu.android.group4trippytrips.AuthenticateFragment"
         android:label="Login Page">
         <action
             android:id="@+id/action_loginFragment_to_homeFragment"

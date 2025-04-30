@@ -4,31 +4,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".LoginFragment">
+    tools:context=".AuthenticateFragment">
 
     <!-- TODO: Update blank fragment layout -->
+
+
+    <!-- TEMPORARY Button to Go to Home (easy to remove later) -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="@string/hello_blank_fragment" />
 
-
-
-    <!-- TEMPORARY Button to Go to Home (easy to remove later) -->
     <Button
         android:id="@+id/tempButtonGoHome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TEMP: Go to Home"
         android:layout_marginTop="40dp"
         android:layout_marginBottom="40dp"
         android:padding="16dp"
-        app:layout_constraintTop_toTopOf="parent"
+        android:text="TEMP: Go to Home"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-
-
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </FrameLayout>
