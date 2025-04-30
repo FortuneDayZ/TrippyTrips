@@ -28,11 +28,6 @@ public class WelcomePage extends Fragment {
                         .navigate(R.id.action_welcomePage_to_loginFragment)
         );
 
-        signUpButton.setOnClickListener(v ->
-                NavHostFragment.findNavController(WelcomePage.this)
-                        .navigate(R.id.action_welcomePage_to_signUpFragment)
-        );
-
         return view;
     }
 }
