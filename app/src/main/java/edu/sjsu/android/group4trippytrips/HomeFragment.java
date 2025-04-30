@@ -3,6 +3,7 @@ package edu.sjsu.android.group4trippytrips;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,9 +17,18 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
+
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.libraries.places.api.Places;
+import com.google.android.libraries.places.api.model.Place;
+import com.google.android.libraries.places.api.model.RectangularBounds;
+import com.google.android.libraries.places.api.net.PlacesClient;
+import com.google.android.libraries.places.api.net.SearchByTextRequest;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.List;
 
 public class HomeFragment extends Fragment {
 
@@ -78,6 +88,34 @@ public class HomeFragment extends Fragment {
             }
             return false;
         });
+        // --------------------------- TEST CODE ONLY ----------------------------- //
+        // Define a variable to hold the Places API key.
+        String apiKey = BuildConfig.GROUP_PROJECT_GOOGLE_API_KEY;
+
+        // Initialize the SDK
+        Places.initializeWithNewPlacesApiEnabled(container.getContext(), apiKey);
+
+        // Create a new PlacesClient instance
+        PlacesClient placesClient = Places.createClient(container.getContext());
+
+        // Specify the list of fields to return.
+        final List<Place.Field> placeFields = Arrays.asList(Place.Field.ID, Place.Field.DISPLAY_NAME);
+
+        // Define latitude and longitude coordinates of the search area.
+        LatLng southWest = new LatLng(37.38816277477739, -122.08813770258874);
+        LatLng northEast = new LatLng(37.39580487866437, -122.07702325966572);
+
+        // Use the builder to create a SearchByTextRequest object.
+        final SearchByTextRequest searchByTextRequest = SearchByTextRequest.builder("Spicy Vegetarian Food", placeFields)
+                .setMaxResultCount(10)
+                .setLocationRestriction(RectangularBounds.newInstance(southWest, northEast)).build();
+
+        // Call PlacesClient.searchByText() to perform the search.
+        // Define a response handler to process the returned List of Place objects.
+        placesClient.searchByText(searchByTextRequest)
+                .addOnSuccessListener(response -> {
+                    List<Place> places = response.getPlaces();
+                });
 
         return view;
     }

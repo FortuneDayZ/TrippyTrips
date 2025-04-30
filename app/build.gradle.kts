@@ -52,7 +52,9 @@ dependencies {
     implementation(libs.activity)
     implementation(libs.constraintlayout)
     implementation(libs.navigation.fragment)   // add Navigation Fragment
-    implementation(libs.navigation.ui)         // add Navigation UI
+    implementation(libs.navigation.ui)
+    implementation(libs.play.services.fitness)
+    implementation(libs.places)  // add Navigation UI
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
