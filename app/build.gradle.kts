@@ -1,7 +1,14 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
 }
 
+val localProperties = Properties()
+val localPropertiesFile = rootProject.file("local.properties")
+if (localPropertiesFile.exists()){
+    localProperties.load(localPropertiesFile.inputStream())
+}
 android {
     namespace = "edu.sjsu.android.group4trippytrips"
     compileSdk = 35
@@ -18,6 +25,8 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String", "GROUP_PROJECT_GOOGLE_API_KEY", "\"${localProperties["GROUP_PROJECT_GOOGLE_API_KEY"]}\"")
     }
 
     buildTypes {
