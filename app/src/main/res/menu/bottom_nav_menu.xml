@@ -1,24 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
     <item
         android:id="@+id/homeFragment"
         android:icon="@drawable/ic_nav_home"
         android:title="Home" />
 
     <item
-        android:id="@+id/exploreFragment"
+        android:id="@+id/searchResultsFragment"
         android:icon="@drawable/ic_nav_explore"
         android:title="Search" />
 
     <item
-        android:id="@+id/bookingsFragment"
+        android:id="@+id/addedItemsFragment"
         android:icon="@drawable/ic_nav_bookings"
         android:title="Saved" />
 
     <item
-        android:id="@+id/profileFragment"
+        android:id="@+id/settingsFragment"
         android:icon="@drawable/ic_nav_profile"
         android:title="Settings" />
-
 </menu>

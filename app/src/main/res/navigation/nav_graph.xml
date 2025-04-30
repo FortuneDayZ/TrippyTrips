@@ -22,35 +22,23 @@
             app:destination="@id/homeFragment" />
     </fragment>
 
-
     <fragment
         android:id="@+id/homeFragment"
         android:name="edu.sjsu.android.group4trippytrips.HomeFragment"
-        android:label="Home Page">
-        <action
-            android:id="@+id/action_homeFragment_to_settingsFragment"
-            app:destination="@id/settingsFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_searchResultsFragment"
-            app:destination="@id/searchResultsFragment" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/settingsFragment"
-        android:name="edu.sjsu.android.group4trippytrips.SettingsFragment"
-        android:label="Settings Page" />
+        android:label="Home Page" />
 
     <fragment
         android:id="@+id/searchResultsFragment"
         android:name="edu.sjsu.android.group4trippytrips.SearchResultsFragment"
-        android:label="Search Results Page">
-        <action
-            android:id="@+id/action_searchResultsFragment_to_addedItemsFragment"
-            app:destination="@id/addedItemsFragment" />
-    </fragment>
+        android:label="Search Results Page" />
 
     <fragment
         android:id="@+id/addedItemsFragment"
         android:name="edu.sjsu.android.group4trippytrips.AddedItemsFragment"
         android:label="Added Items Page" />
+
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="edu.sjsu.android.group4trippytrips.SettingsFragment"
+        android:label="Settings Page" />
 </navigation>

@@ -62,18 +62,18 @@ public class HomeFragment extends Fragment {
         bottomNavigation.setOnItemSelectedListener(item -> {
             int itemId = item.getItemId();
             if (itemId == R.id.homeFragment) {
-                return true; // Already here
-            } else if (itemId == R.id.exploreFragment) {
-                NavHostFragment.findNavController(HomeFragment.this)
-                        .navigate(R.id.exploreFragment);
                 return true;
-            } else if (itemId == R.id.bookingsFragment) {
+            } else if (itemId == R.id.searchResultsFragment) {
                 NavHostFragment.findNavController(HomeFragment.this)
-                        .navigate(R.id.bookingsFragment);
+                        .navigate(R.id.searchResultsFragment);
                 return true;
-            } else if (itemId == R.id.profileFragment) {
+            } else if (itemId == R.id.addedItemsFragment) {
                 NavHostFragment.findNavController(HomeFragment.this)
-                        .navigate(R.id.profileFragment);
+                        .navigate(R.id.addedItemsFragment);
+                return true;
+            } else if (itemId == R.id.settingsFragment) {
+                NavHostFragment.findNavController(HomeFragment.this)
+                        .navigate(R.id.settingsFragment);
                 return true;
             }
             return false;
