@@ -6,4 +6,7 @@
     <string name="sign_up">SIGN UP</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="enter_password">Enter Password</string>
+    <string name="enter_username">Enter Username</string>
+    <string name="temp_go_to_home">TEMP: Go to Home</string>
 </resources>
