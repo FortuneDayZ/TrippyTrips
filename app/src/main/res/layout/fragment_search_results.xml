@@ -26,23 +26,101 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <!-- Optional Title -->
+            <!-- Centered Bold Title -->
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Top City Results"
-                android:textSize="18sp"
+                android:text="Search Results"
+                android:gravity="center"
+                android:textSize="30sp"
                 android:textStyle="bold"
                 android:textColor="@android:color/black"
-                android:layout_marginBottom="12dp" />
+                android:layout_marginBottom="16dp" />
 
-            <!-- Results will be added dynamically here -->
+
+            <!-- Static Result Template Repeated 10 Times -->
+            <!-- You’ll likely generate these dynamically in code -->
+            <!-- START -->
+            <!-- Copy this block for all 10 results -->
+            <!-- To avoid repetition, here's just one; reuse or loop in Java -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="16dp"
+                android:layout_marginBottom="12dp"
+                android:background="#F2F2F2"
+                android:gravity="center_vertical"
+                android:elevation="2dp">
+
+                <!-- Text Section -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <!-- Hotel Name -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Hotel A"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="#000000" />
+
+                    <!-- Location -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="New York"
+                        android:textSize="14sp"
+                        android:textColor="#666666"
+                        android:layout_marginTop="4dp" />
+
+                    <!-- Rating -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="4dp"
+                        android:gravity="center_vertical">
+
+                        <ImageView
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"
+                            android:src="@android:drawable/btn_star_big_on"
+                            android:tint="#FFD700" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="4/5"
+                            android:textSize="14sp"
+                            android:textColor="#555555"
+                            android:layout_marginStart="6dp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- Add Button -->
+                <ImageButton
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@android:drawable/ic_input_add"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:tint="#000000"
+                    android:contentDescription="Add Hotel" />
+            </LinearLayout>
+
+            <!-- END BLOCK – Repeat above for all 10 if needed statically -->
+
+            <!-- Dynamic Container (optional) -->
             <LinearLayout
                 android:id="@+id/cityResultsContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical" />
-
         </LinearLayout>
     </ScrollView>
 

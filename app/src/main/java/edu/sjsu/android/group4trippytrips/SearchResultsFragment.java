@@ -39,7 +39,7 @@ public class SearchResultsFragment extends Fragment {
     private void addHotelResult(String name, String rating, String city) {
         if (getContext() == null) return;
 
-        // Parent horizontal layout
+        // Main horizontal layout for each result
         LinearLayout itemLayout = new LinearLayout(getContext());
         itemLayout.setOrientation(LinearLayout.HORIZONTAL);
         itemLayout.setPadding(16, 16, 16, 16);
@@ -50,13 +50,14 @@ public class SearchResultsFragment extends Fragment {
         itemLayout.setLayoutParams(itemParams);
         itemLayout.setGravity(Gravity.CENTER_VERTICAL);
 
-        // Vertical container for text
+        // Text container (vertical)
         LinearLayout textContainer = new LinearLayout(getContext());
         textContainer.setOrientation(LinearLayout.VERTICAL);
-        textContainer.setLayoutParams(new LinearLayout.LayoutParams(0,
-                ViewGroup.LayoutParams.WRAP_CONTENT, 1));
+        textContainer.setLayoutParams(new LinearLayout.LayoutParams(
+                0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f
+        ));
 
-        // Hotel name
+        // Hotel Name
         TextView hotelName = new TextView(getContext());
         hotelName.setText(name);
         hotelName.setTextSize(18);
@@ -64,30 +65,38 @@ public class SearchResultsFragment extends Fragment {
         hotelName.setTextColor(Color.BLACK);
         textContainer.addView(hotelName);
 
-        // Rating and City row
-        LinearLayout subRow = new LinearLayout(getContext());
-        subRow.setOrientation(LinearLayout.HORIZONTAL);
-        subRow.setGravity(Gravity.CENTER_VERTICAL);
-        subRow.setPadding(0, 8, 0, 0);
+        // Location (City) — shown below name
+        TextView locationView = new TextView(getContext());
+        locationView.setText(city);
+        locationView.setTextSize(14);
+        locationView.setTextColor(Color.parseColor("#666666"));
+        locationView.setPadding(0, 4, 0, 0);
+        textContainer.addView(locationView);
+
+        // Rating row
+        LinearLayout ratingRow = new LinearLayout(getContext());
+        ratingRow.setOrientation(LinearLayout.HORIZONTAL);
+        ratingRow.setGravity(Gravity.CENTER_VERTICAL);
+        ratingRow.setPadding(0, 8, 0, 0);
 
         ImageView starIcon = new ImageView(getContext());
         starIcon.setImageResource(android.R.drawable.btn_star_big_on);
         starIcon.setColorFilter(Color.parseColor("#FFD700"));
-        LinearLayout.LayoutParams iconParams = new LinearLayout.LayoutParams(40, 40);
-        starIcon.setLayoutParams(iconParams);
-        subRow.addView(starIcon);
+        LinearLayout.LayoutParams starParams = new LinearLayout.LayoutParams(40, 40);
+        starIcon.setLayoutParams(starParams);
+        ratingRow.addView(starIcon);
 
         TextView ratingView = new TextView(getContext());
-        ratingView.setText(" " + rating + "  •  " + city);
+        ratingView.setText(" " + rating);
         ratingView.setTextSize(14);
         ratingView.setTextColor(Color.DKGRAY);
         ratingView.setPadding(8, 0, 0, 0);
-        subRow.addView(ratingView);
+        ratingRow.addView(ratingView);
 
-        textContainer.addView(subRow);
+        textContainer.addView(ratingRow);
         itemLayout.addView(textContainer);
 
-        // Add button
+        // Add (+) button
         ImageButton addButton = new ImageButton(getContext());
         addButton.setImageResource(android.R.drawable.ic_input_add);
         addButton.setBackground(null);
@@ -97,8 +106,7 @@ public class SearchResultsFragment extends Fragment {
         addButton.setContentDescription("Add Hotel");
         itemLayout.addView(addButton);
 
-        // Add the view to container
+        // Add to container
         cityResultsContainer.addView(itemLayout);
     }
 }
-
