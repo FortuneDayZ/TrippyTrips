@@ -37,20 +37,14 @@
                 android:textColor="@android:color/black"
                 android:layout_marginBottom="16dp" />
 
-
-            <!-- Static Result Template Repeated 10 Times -->
-            <!-- You’ll likely generate these dynamically in code -->
-            <!-- START -->
-            <!-- Copy this block for all 10 results -->
-            <!-- To avoid repetition, here's just one; reuse or loop in Java -->
-
+            <!-- Example Static Hotel Result Block -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:padding="16dp"
                 android:layout_marginBottom="12dp"
-                android:background="#F2F2F2"
+                android:background="#E0F2F1"
                 android:gravity="center_vertical"
                 android:elevation="2dp">
 
@@ -66,7 +60,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Hotel A"
-                        android:textSize="18sp"
+                        android:textSize="28sp"
                         android:textStyle="bold"
                         android:textColor="#000000" />
 
@@ -75,7 +69,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="New York"
-                        android:textSize="14sp"
+                        android:textSize="20sp"
                         android:textColor="#666666"
                         android:layout_marginTop="4dp" />
 
@@ -97,25 +91,33 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="4/5"
-                            android:textSize="14sp"
+                            android:textSize="20sp"
                             android:textColor="#555555"
                             android:layout_marginStart="6dp" />
                     </LinearLayout>
                 </LinearLayout>
 
-                <!-- Add Button -->
-                <ImageButton
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:src="@android:drawable/ic_input_add"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:tint="#000000"
-                    android:contentDescription="Add Hotel" />
+                <!-- Colored Square Around Plus Icon -->
+                <FrameLayout
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_marginStart="8dp"
+                    android:background="#B0BEC5"
+                    android:layout_gravity="center"
+                    android:padding="4dp">
+
+                    <ImageButton
+                        android:id="@+id/addHotelButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@android:drawable/ic_input_add"
+                        android:background="@android:color/transparent"
+                        android:tint="#000000"
+                        android:contentDescription="Add Hotel" />
+                </FrameLayout>
             </LinearLayout>
 
-            <!-- END BLOCK – Repeat above for all 10 if needed statically -->
-
-            <!-- Dynamic Container (optional) -->
+            <!-- Dynamic Content Goes Here -->
             <LinearLayout
                 android:id="@+id/cityResultsContainer"
                 android:layout_width="match_parent"

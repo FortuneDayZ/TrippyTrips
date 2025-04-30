@@ -1,5 +1,6 @@
 package edu.sjsu.android.group4trippytrips;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -7,6 +8,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -24,7 +26,7 @@ public class SearchResultsFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_search_results, container, false);
         cityResultsContainer = rootView.findViewById(R.id.cityResultsContainer);
 
-        // Example: Simulated top 10 city/hotel results
+        // Simulated hotel data
         String[] hotelNames = {"Hotel A", "Hotel B", "Hotel C", "Hotel D", "Hotel E", "Hotel F", "Hotel G", "Hotel H", "Hotel I", "Hotel J"};
         String[] ratings = {"4/5", "3/5", "5/5", "4/5", "4/5", "3/5", "5/5", "2/5", "4/5", "5/5"};
         String[] cities = {"New York", "Los Angeles", "Chicago", "Miami", "Austin", "Seattle", "Boston", "San Francisco", "Denver", "Atlanta"};
@@ -38,75 +40,98 @@ public class SearchResultsFragment extends Fragment {
 
     private void addHotelResult(String name, String rating, String city) {
         if (getContext() == null) return;
+        Context context = getContext();
 
-        // Main horizontal layout for each result
-        LinearLayout itemLayout = new LinearLayout(getContext());
+        // Entire card container
+        LinearLayout itemLayout = new LinearLayout(context);
         itemLayout.setOrientation(LinearLayout.HORIZONTAL);
-        itemLayout.setPadding(16, 16, 16, 16);
-        itemLayout.setBackgroundColor(Color.parseColor("#F2F2F2"));
-        LinearLayout.LayoutParams itemParams = new LinearLayout.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        itemParams.setMargins(0, 0, 0, 24);
-        itemLayout.setLayoutParams(itemParams);
+        itemLayout.setPadding(dpToPx(16), dpToPx(16), dpToPx(16), dpToPx(16));
+        itemLayout.setBackgroundColor(Color.parseColor("#E0F2F1"));
         itemLayout.setGravity(Gravity.CENTER_VERTICAL);
 
-        // Text container (vertical)
-        LinearLayout textContainer = new LinearLayout(getContext());
+        LinearLayout.LayoutParams itemParams = new LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        itemParams.setMargins(0, 0, 0, dpToPx(12));
+        itemLayout.setLayoutParams(itemParams);
+
+        // Text column
+        LinearLayout textContainer = new LinearLayout(context);
         textContainer.setOrientation(LinearLayout.VERTICAL);
         textContainer.setLayoutParams(new LinearLayout.LayoutParams(
                 0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f
         ));
 
-        // Hotel Name
-        TextView hotelName = new TextView(getContext());
+        // Hotel name
+        TextView hotelName = new TextView(context);
         hotelName.setText(name);
-        hotelName.setTextSize(18);
+        hotelName.setTextSize(28);
         hotelName.setTypeface(null, Typeface.BOLD);
         hotelName.setTextColor(Color.BLACK);
         textContainer.addView(hotelName);
 
-        // Location (City) — shown below name
-        TextView locationView = new TextView(getContext());
+        // City
+        TextView locationView = new TextView(context);
         locationView.setText(city);
-        locationView.setTextSize(14);
+        locationView.setTextSize(20);
         locationView.setTextColor(Color.parseColor("#666666"));
-        locationView.setPadding(0, 4, 0, 0);
+        locationView.setPadding(0, dpToPx(4), 0, 0);
         textContainer.addView(locationView);
 
-        // Rating row
-        LinearLayout ratingRow = new LinearLayout(getContext());
+        // Rating
+        LinearLayout ratingRow = new LinearLayout(context);
         ratingRow.setOrientation(LinearLayout.HORIZONTAL);
         ratingRow.setGravity(Gravity.CENTER_VERTICAL);
-        ratingRow.setPadding(0, 8, 0, 0);
+        ratingRow.setPadding(0, dpToPx(8), 0, 0);
 
-        ImageView starIcon = new ImageView(getContext());
+        ImageView starIcon = new ImageView(context);
         starIcon.setImageResource(android.R.drawable.btn_star_big_on);
         starIcon.setColorFilter(Color.parseColor("#FFD700"));
-        LinearLayout.LayoutParams starParams = new LinearLayout.LayoutParams(40, 40);
+        LinearLayout.LayoutParams starParams = new LinearLayout.LayoutParams(
+                dpToPx(18), dpToPx(18));
         starIcon.setLayoutParams(starParams);
         ratingRow.addView(starIcon);
 
-        TextView ratingView = new TextView(getContext());
+        TextView ratingView = new TextView(context);
         ratingView.setText(" " + rating);
-        ratingView.setTextSize(14);
-        ratingView.setTextColor(Color.DKGRAY);
-        ratingView.setPadding(8, 0, 0, 0);
+        ratingView.setTextSize(20);
+        ratingView.setTextColor(Color.parseColor("#555555"));
+        ratingView.setPadding(dpToPx(6), 0, 0, 0);
         ratingRow.addView(ratingView);
 
         textContainer.addView(ratingRow);
         itemLayout.addView(textContainer);
 
-        // Add (+) button
-        ImageButton addButton = new ImageButton(getContext());
-        addButton.setImageResource(android.R.drawable.ic_input_add);
-        addButton.setBackground(null);
-        addButton.setColorFilter(Color.BLACK);
-        LinearLayout.LayoutParams buttonParams = new LinearLayout.LayoutParams(100, 100);
-        addButton.setLayoutParams(buttonParams);
-        addButton.setContentDescription("Add Hotel");
-        itemLayout.addView(addButton);
+        // Square background for plus icon
+        FrameLayout squareFrame = new FrameLayout(context);
+        LinearLayout.LayoutParams frameParams = new LinearLayout.LayoutParams(
+                dpToPx(48), dpToPx(48));
+        frameParams.setMargins(dpToPx(8), 0, 0, 0);
+        squareFrame.setLayoutParams(frameParams);
+        squareFrame.setBackgroundColor(Color.parseColor("#B0BEC5"));
+        squareFrame.setPadding(dpToPx(4), dpToPx(4), dpToPx(4), dpToPx(4));
 
-        // Add to container
+        // Plus icon
+        ImageButton addButton = new ImageButton(context);
+        addButton.setImageResource(android.R.drawable.ic_input_add);
+        addButton.setBackgroundColor(Color.TRANSPARENT);
+        addButton.setColorFilter(Color.BLACK);
+        addButton.setScaleType(ImageView.ScaleType.CENTER);
+        addButton.setPadding(0, 0, 0, 0);
+        addButton.setContentDescription("Add Hotel");
+
+        FrameLayout.LayoutParams btnParams = new FrameLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT);
+        addButton.setLayoutParams(btnParams);
+        squareFrame.addView(addButton);
+
+        itemLayout.addView(squareFrame);
         cityResultsContainer.addView(itemLayout);
+    }
+
+    // Helper method to convert dp to px
+    private int dpToPx(int dp) {
+        float density = getResources().getDisplayMetrics().density;
+        return Math.round(dp * density);
     }
 }
