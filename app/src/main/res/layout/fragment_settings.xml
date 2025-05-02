@@ -31,12 +31,83 @@
                 android:id="@+id/settingsTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Settings"
+                android:text="@string/settings"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 android:textColor="@android:color/black"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="16dp" />
+
+            <TextView
+                android:id="@+id/changePassword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/change_password"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginTop="30dp"/>
+
+            <EditText
+                android:id="@+id/newPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints="Enter new password here"
+                android:hint="@string/enter_new_password_here"
+                android:ems="10"
+                android:inputType="textPassword" />
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/submit"
+                android:layout_marginTop="15dp"/>
+
+            <TextView
+                android:id="@+id/clearData"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/please_click_the_button_below_to_clear_all_the_user_data"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginTop="50dp"/>
+
+            <TextView
+                android:id="@+id/dangerNote"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/this_action_cannot_be_reversed"
+                android:textSize="14sp" />
+
+            <Button
+                android:id="@+id/clearDataButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/clear_my_data"
+                android:layout_marginTop="15dp"/>
+
+            <TextView
+                android:id="@+id/deleteAccount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/please_click_the_button_below_to_delete_your_account"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginTop="50dp"/>
+
+            <TextView
+                android:id="@+id/dangerNote2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/this_action_cannot_be_reversed"
+                android:textSize="14sp" />
+
+            <Button
+                android:id="@+id/deleteAccountButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/delete_account"
+                android:layout_marginTop="15dp"/>
 
             <!-- Add more settings options here -->
 
