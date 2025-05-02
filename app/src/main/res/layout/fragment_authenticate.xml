@@ -27,7 +27,7 @@
         android:gravity="center"
         android:padding="16dp"
         android:inputType="text"
-        android:text="@string/enter_username" />
+        android:hint="@string/enter_username" />
 
     <EditText
         android:id="@+id/Password"
@@ -35,8 +35,8 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:padding="16dp"
-        android:inputType="text"
-        android:text="@string/enter_password"
+        android:inputType="textVisiblePassword"
+        android:hint="@string/enter_password"
         tools:ignore="TextFields" />
 
     <Button
@@ -61,7 +61,7 @@
         android:gravity="center"
         android:padding="16dp"
         android:inputType="text"
-        android:text="@string/enter_username" />
+        android:hint="@string/enter_username" />
 
     <EditText
         android:id="@+id/sPassword"
@@ -69,8 +69,8 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:padding="16dp"
-        android:inputType="text"
-        android:text="@string/enter_password"
+        android:inputType="textVisiblePassword"
+        android:hint="@string/enter_password"
         tools:ignore="TextFields" />
 
     <Button
