@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -45,27 +46,33 @@ public class AddedItemsFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_added_items, container, false);
 
-        // ✅ Bottom navigation setup
+        // ✅ Setup BottomNavigationView
         BottomNavigationView bottomNavigation = rootView.findViewById(R.id.bottom_navigation);
-        bottomNavigation.setSelectedItemId(R.id.addedItemsFragment);
+        bottomNavigation.setSelectedItemId(R.id.addedItemsFragment); // Highlight "Saved"
 
+        // ✅ Prevent unnecessary re-navigation
         bottomNavigation.setOnItemSelectedListener(item -> {
             int itemId = item.getItemId();
+            NavController navController = NavHostFragment.findNavController(this);
+            int currentId = navController.getCurrentDestination().getId();
+
+            if (itemId == currentId) {
+                return true; // Already on this fragment
+            }
+
             if (itemId == R.id.homeFragment) {
-                NavHostFragment.findNavController(AddedItemsFragment.this)
-                        .navigate(R.id.homeFragment);
+                navController.navigate(R.id.homeFragment);
                 return true;
             } else if (itemId == R.id.searchResultsFragment) {
-                NavHostFragment.findNavController(AddedItemsFragment.this)
-                        .navigate(R.id.searchResultsFragment);
+                navController.navigate(R.id.searchResultsFragment);
                 return true;
             } else if (itemId == R.id.addedItemsFragment) {
-                return true; // already on this page
+                return true;
             } else if (itemId == R.id.settingsFragment) {
-                NavHostFragment.findNavController(AddedItemsFragment.this)
-                        .navigate(R.id.settingsFragment);
+                navController.navigate(R.id.settingsFragment);
                 return true;
             }
+
             return false;
         });
 
