@@ -17,7 +17,6 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
-
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.Place;
@@ -69,6 +68,10 @@ public class HomeFragment extends Fragment {
 
         // ✅ Bottom Navigation logic using if-else instead of switch
         BottomNavigationView bottomNavigation = view.findViewById(R.id.bottom_navigation);
+
+        // ✅ Set currently selected item to Home
+        bottomNavigation.setSelectedItemId(R.id.homeFragment);
+
         bottomNavigation.setOnItemSelectedListener(item -> {
             int itemId = item.getItemId();
             if (itemId == R.id.homeFragment) {
@@ -88,6 +91,7 @@ public class HomeFragment extends Fragment {
             }
             return false;
         });
+
         // --------------------------- TEST CODE ONLY ----------------------------- //
         // Define a variable to hold the Places API key.
         String apiKey = BuildConfig.GROUP_PROJECT_GOOGLE_API_KEY;

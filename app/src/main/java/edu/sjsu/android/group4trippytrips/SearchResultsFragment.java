@@ -15,6 +15,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class SearchResultsFragment extends Fragment {
 
@@ -25,6 +28,30 @@ public class SearchResultsFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_search_results, container, false);
         cityResultsContainer = rootView.findViewById(R.id.cityResultsContainer);
+
+        // ✅ Bottom Navigation Logic
+        BottomNavigationView bottomNavigation = rootView.findViewById(R.id.bottom_navigation);
+        bottomNavigation.setSelectedItemId(R.id.searchResultsFragment);
+
+        bottomNavigation.setOnItemSelectedListener(item -> {
+            int itemId = item.getItemId();
+            if (itemId == R.id.homeFragment) {
+                NavHostFragment.findNavController(SearchResultsFragment.this)
+                        .navigate(R.id.homeFragment);
+                return true;
+            } else if (itemId == R.id.searchResultsFragment) {
+                return true; // already here
+            } else if (itemId == R.id.addedItemsFragment) {
+                NavHostFragment.findNavController(SearchResultsFragment.this)
+                        .navigate(R.id.addedItemsFragment);
+                return true;
+            } else if (itemId == R.id.settingsFragment) {
+                NavHostFragment.findNavController(SearchResultsFragment.this)
+                        .navigate(R.id.settingsFragment);
+                return true;
+            }
+            return false;
+        });
 
         // Simulated hotel data
         String[] hotelNames = {"Hotel A", "Hotel B", "Hotel C", "Hotel D", "Hotel E", "Hotel F", "Hotel G", "Hotel H", "Hotel I", "Hotel J"};
