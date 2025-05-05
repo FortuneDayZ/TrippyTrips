@@ -22,6 +22,8 @@
 
     <string name="welcome_instructions_detailed">Plan your perfect getaway with Trippy Trips. Explore destinations, and find great places to stay and things to do.</string>
 
+    <string name="app_logo">App logo</string>
+
     <string name="get_started">Get Started</string>
 
 </resources>
