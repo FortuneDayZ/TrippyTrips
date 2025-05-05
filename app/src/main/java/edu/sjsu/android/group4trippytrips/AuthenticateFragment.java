@@ -39,24 +39,26 @@ public class AuthenticateFragment extends Fragment {
         loginButton.setOnClickListener(v -> {
             String username = usernameField.getText().toString().trim();
             String password = passwordField.getText().toString().trim();
+            if(username.isEmpty() || password.isEmpty()){
+                Toast.makeText(getActivity(), "Log In Failed.", Toast.LENGTH_LONG).show();
+            }
+            else {
+                try (Cursor cursor = requireContext().getContentResolver().query(
+                        Uri.parse("content://edu.sjsu.android.group4trippytrips.authenticate"),
+                        null, // projection
+                        username,
+                        new String[]{password},
+                        null
+                )) {
+                    if (cursor != null && cursor.moveToFirst()) {
 
-
-            try (Cursor cursor = requireContext().getContentResolver().query(
-                    Uri.parse("content://edu.sjsu.android.group4trippytrips.authenticate"),
-                    null, // projection
-                    username,
-                    new String[]{password},
-                    null
-            )) {
-                if (cursor != null && cursor.moveToFirst()) {
-
-                    NavHostFragment.findNavController(AuthenticateFragment.this)
-                            .navigate(R.id.action_loginFragment_to_homeFragment);
-                } else {
-                    Toast.makeText(getActivity(), "Log In Failed.", Toast.LENGTH_LONG).show();
+                        NavHostFragment.findNavController(AuthenticateFragment.this)
+                                .navigate(R.id.action_loginFragment_to_homeFragment);
+                    } else {
+                        Toast.makeText(getActivity(), "Log In Failed.", Toast.LENGTH_LONG).show();
+                    }
                 }
             }
-
         });
 
         //Button for sign up
@@ -66,27 +68,32 @@ public class AuthenticateFragment extends Fragment {
         signupButton.setOnClickListener(v -> {
             String username = sUsernameField.getText().toString().trim();
             String password = sPasswordField.getText().toString().trim();
-            try (Cursor sCursor = requireContext().getContentResolver().query(
-                    Uri.parse("content://edu.sjsu.android.group4trippytrips.authenticate"),
-                    null, // projection
-                    username,
-                    new String[]{password},
-                    null
-            )) {
-                ContentValues values = new ContentValues();
-                values.put("username", username);
-                values.put("password", password);
-                if (sCursor != null && sCursor.moveToFirst()) {
-                    Toast.makeText(getActivity(), "Sign Up Failed.", Toast.LENGTH_LONG).show();
-                } else {
-                    Uri uri = requireContext().getContentResolver().insert(
-                            Uri.parse("content://edu.sjsu.android.group4trippytrips.authenticate"),
-                            values
-                    );
-                    if (uri == null) {
+            if(username.isEmpty() || password.isEmpty()){
+                Toast.makeText(getActivity(), "Sign Up Failed", Toast.LENGTH_LONG).show();
+            }
+            else{
+                try (Cursor sCursor = requireContext().getContentResolver().query(
+                        Uri.parse("content://edu.sjsu.android.group4trippytrips.authenticate"),
+                        null, // projection
+                        username,
+                        new String[]{password},
+                        null
+                )) {
+                    ContentValues values = new ContentValues();
+                    values.put("username", username);
+                    values.put("password", password);
+                    if (sCursor != null && sCursor.moveToFirst()) {
                         Toast.makeText(getActivity(), "Sign Up Failed.", Toast.LENGTH_LONG).show();
                     } else {
-                        Toast.makeText(getActivity(), "Sign Up Success! Please Log In.", Toast.LENGTH_LONG).show();
+                        Uri uri = requireContext().getContentResolver().insert(
+                                Uri.parse("content://edu.sjsu.android.group4trippytrips.authenticate"),
+                                values
+                        );
+                        if (uri == null) {
+                            Toast.makeText(getActivity(), "Sign Up Failed.", Toast.LENGTH_LONG).show();
+                        } else {
+                            Toast.makeText(getActivity(), "Sign Up Success! Please Log In.", Toast.LENGTH_LONG).show();
+                        }
                     }
                 }
             }
