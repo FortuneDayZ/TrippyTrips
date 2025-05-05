@@ -15,7 +15,7 @@
         android:layout_height="0dp"
         android:fillViewport="true"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
+        app:layout_constraintBottom_toTopOf="@+id/divider"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
@@ -24,21 +24,28 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:paddingBottom="24dp">
 
             <!-- Title -->
             <TextView
                 android:id="@+id/addedItemsTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Added Items"
+                android:layout_marginTop="45dp"
                 android:gravity="center"
-                android:textSize="30sp"
+                android:text="Added Items"
+                android:textSize="35sp"
                 android:textStyle="bold"
-                android:textColor="@android:color/black"
-                android:layout_marginBottom="16dp" />
+                android:textColor="@android:color/black" />
 
             <!-- Add your dynamic or static item blocks here -->
+            <LinearLayout
+                android:id="@+id/dynamicItemsSection"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginHorizontal="16dp"
+                android:orientation="vertical" />
 
         </LinearLayout>
     </ScrollView>

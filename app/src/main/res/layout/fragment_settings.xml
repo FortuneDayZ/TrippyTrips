@@ -8,14 +8,14 @@
     android:background="#FFFFFF"
     tools:context=".SettingsFragment">
 
-    <!-- Scrollable or main content -->
+    <!-- Scrollable content -->
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:fillViewport="true"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
+        app:layout_constraintBottom_toTopOf="@+id/divider"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
@@ -24,58 +24,66 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:paddingBottom="24dp">
 
-            <!-- Example content -->
+            <!-- Settings Title -->
             <TextView
                 android:id="@+id/settingsTitle"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="45dp"
+                android:gravity="center"
                 android:text="@string/settings"
-                android:textSize="24sp"
+                android:textSize="35sp"
                 android:textStyle="bold"
-                android:textColor="@android:color/black"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="16dp" />
+                android:textColor="@android:color/black" />
 
+            <!-- Change Password Section -->
             <TextView
                 android:id="@+id/changePassword"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginHorizontal="16dp"
                 android:text="@string/change_password"
                 android:textSize="18sp"
-                android:textStyle="bold"
-                android:layout_marginTop="30dp"/>
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/newPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:autofillHints="Enter new password here"
+                android:layout_marginTop="8dp"
+                android:layout_marginHorizontal="16dp"
                 android:hint="@string/enter_new_password_here"
-                android:ems="10"
-                android:inputType="textPassword" />
+                android:inputType="textPassword"
+                android:padding="12dp" />
 
             <Button
                 android:id="@+id/button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/submit"
-                android:layout_marginTop="15dp"/>
+                android:layout_marginTop="15dp"
+                android:layout_marginHorizontal="16dp"
+                android:text="@string/submit" />
 
+            <!-- Clear Data Section -->
             <TextView
                 android:id="@+id/clearData"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:layout_marginHorizontal="16dp"
                 android:text="@string/please_click_the_button_below_to_clear_all_the_user_data"
                 android:textSize="18sp"
-                android:textStyle="bold"
-                android:layout_marginTop="50dp"/>
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/dangerNote"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginHorizontal="16dp"
                 android:text="@string/this_action_cannot_be_reversed"
                 android:textSize="14sp" />
 
@@ -83,22 +91,27 @@
                 android:id="@+id/clearDataButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/clear_my_data"
-                android:layout_marginTop="15dp"/>
+                android:layout_marginTop="15dp"
+                android:layout_marginHorizontal="16dp"
+                android:text="@string/clear_my_data" />
 
+            <!-- Delete Account Section -->
             <TextView
                 android:id="@+id/deleteAccount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:layout_marginHorizontal="16dp"
                 android:text="@string/please_click_the_button_below_to_delete_your_account"
                 android:textSize="18sp"
-                android:textStyle="bold"
-                android:layout_marginTop="50dp"/>
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/dangerNote2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginHorizontal="16dp"
                 android:text="@string/this_action_cannot_be_reversed"
                 android:textSize="14sp" />
 
@@ -106,10 +119,9 @@
                 android:id="@+id/deleteAccountButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/delete_account"
-                android:layout_marginTop="15dp"/>
-
-            <!-- Add more settings options here -->
+                android:layout_marginTop="15dp"
+                android:layout_marginHorizontal="16dp"
+                android:text="@string/delete_account" />
 
         </LinearLayout>
     </ScrollView>

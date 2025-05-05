@@ -15,7 +15,7 @@
         android:layout_height="0dp"
         android:fillViewport="true"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
+        app:layout_constraintBottom_toTopOf="@+id/divider"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
@@ -24,56 +24,55 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:paddingBottom="24dp">
 
-            <!-- Centered Bold Title -->
+            <!-- Page Title -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Search Results"
+                android:layout_marginTop="45dp"
                 android:gravity="center"
-                android:textSize="30sp"
+                android:text="Search Results"
+                android:textSize="35sp"
                 android:textStyle="bold"
-                android:textColor="@android:color/black"
-                android:layout_marginBottom="16dp" />
+                android:textColor="@android:color/black" />
 
-            <!-- Example Static Hotel Result Block -->
+            <!-- Example Result -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:padding="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginHorizontal="16dp"
                 android:layout_marginBottom="12dp"
                 android:background="#E0F2F1"
                 android:gravity="center_vertical"
                 android:elevation="2dp">
 
-                <!-- Text Section -->
+                <!-- Info Column -->
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:orientation="vertical">
 
-                    <!-- Hotel Name -->
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Hotel A"
-                        android:textSize="28sp"
+                        android:textSize="24sp"
                         android:textStyle="bold"
                         android:textColor="#000000" />
 
-                    <!-- Location -->
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="New York"
-                        android:textSize="20sp"
+                        android:textSize="18sp"
                         android:textColor="#666666"
                         android:layout_marginTop="4dp" />
 
-                    <!-- Rating -->
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -91,13 +90,13 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="4/5"
-                            android:textSize="20sp"
+                            android:textSize="16sp"
                             android:textColor="#555555"
                             android:layout_marginStart="6dp" />
                     </LinearLayout>
                 </LinearLayout>
 
-                <!-- Colored Square Around Plus Icon -->
+                <!-- Add Button -->
                 <FrameLayout
                     android:layout_width="48dp"
                     android:layout_height="48dp"
@@ -117,12 +116,13 @@
                 </FrameLayout>
             </LinearLayout>
 
-            <!-- Dynamic Content Goes Here -->
+            <!-- Placeholder for dynamically added results -->
             <LinearLayout
                 android:id="@+id/cityResultsContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" />
+                android:orientation="vertical"
+                android:layout_marginHorizontal="16dp" />
         </LinearLayout>
     </ScrollView>
 
@@ -136,7 +136,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Bottom Navigation (fixed) -->
+    <!-- Bottom Navigation -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="0dp"
