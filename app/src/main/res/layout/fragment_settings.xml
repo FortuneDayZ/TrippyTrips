@@ -47,24 +47,23 @@
                 android:textStyle="bold"
                 android:textColor="@android:color/black" />
 
-            <androidx.cardview.widget.CardView
+            <!-- Updated password field with Material Design style -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/newPasswordInputLayout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginHorizontal="16dp"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="4dp">
+                app:passwordToggleEnabled="true">
 
-                <EditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/newPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/enter_new_password_here"
-                    android:inputType="textPassword"
-                    android:padding="16dp"
-                    android:textSize="17sp"
-                    android:background="@android:color/transparent"/>
-            </androidx.cardview.widget.CardView>
+                    android:inputType="textPassword" />
+            </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/button"

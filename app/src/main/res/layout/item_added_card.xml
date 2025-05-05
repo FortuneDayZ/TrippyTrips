@@ -65,7 +65,6 @@
             </LinearLayout>
         </LinearLayout>
 
-        <!-- ✅ Check Icon (only difference) -->
         <ImageView
             android:id="@+id/checkIcon"
             android:layout_width="48dp"
