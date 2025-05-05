@@ -1,5 +1,6 @@
 package edu.sjsu.android.group4trippytrips;
 
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -8,11 +9,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
-import java.net.HttpCookie;
+
+
 
 public class AuthenticateFragment extends Fragment {
 
@@ -38,29 +41,55 @@ public class AuthenticateFragment extends Fragment {
             String password = passwordField.getText().toString().trim();
 
 
-            Cursor cursor = getContext().getContentResolver().query(
-                    Uri.parse("content://edu.sjsu.android.group4trippytrips/authenticate"),
+            try (Cursor cursor = requireContext().getContentResolver().query(
+                    Uri.parse("content://edu.sjsu.android.group4trippytrips.authenticate"),
                     null, // projection
                     username,
                     new String[]{password},
                     null
-            );
-            if(cursor != null){
+            )) {
+                if (cursor != null && cursor.moveToFirst()) {
 
-                NavHostFragment.findNavController(AuthenticateFragment.this)
-                        .navigate(R.id.action_loginFragment_to_homeFragment);
-            }
-            else{
-
+                    NavHostFragment.findNavController(AuthenticateFragment.this)
+                            .navigate(R.id.action_loginFragment_to_homeFragment);
+                } else {
+                    Toast.makeText(getActivity(), "Log In Failed.", Toast.LENGTH_LONG).show();
+                }
             }
 
         });
 
         //Button for sign up
+        EditText sUsernameField = view.findViewById(R.id.sUsername);
+        EditText sPasswordField = view.findViewById(R.id.sPassword);
         Button signupButton = view.findViewById(R.id.signupButton);
         signupButton.setOnClickListener(v -> {
-            NavHostFragment.findNavController(AuthenticateFragment.this)
-                    .navigate(R.id.action_loginFragment_to_homeFragment);
+            String username = sUsernameField.getText().toString().trim();
+            String password = sPasswordField.getText().toString().trim();
+            try (Cursor sCursor = requireContext().getContentResolver().query(
+                    Uri.parse("content://edu.sjsu.android.group4trippytrips.authenticate"),
+                    null, // projection
+                    username,
+                    new String[]{password},
+                    null
+            )) {
+                ContentValues values = new ContentValues();
+                values.put("username", username);
+                values.put("password", password);
+                if (sCursor != null && sCursor.moveToFirst()) {
+                    Toast.makeText(getActivity(), "Sign Up Failed.", Toast.LENGTH_LONG).show();
+                } else {
+                    Uri uri = requireContext().getContentResolver().insert(
+                            Uri.parse("content://edu.sjsu.android.group4trippytrips.authenticate"),
+                            values
+                    );
+                    if (uri == null) {
+                        Toast.makeText(getActivity(), "Sign Up Failed.", Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(getActivity(), "Sign Up Success! Please Log In.", Toast.LENGTH_LONG).show();
+                    }
+                }
+            }
         });
 
         // TEMPORARY: Button to skip to HomeFragment
@@ -72,4 +101,5 @@ public class AuthenticateFragment extends Fragment {
 
         return view;
     }
+
 }
