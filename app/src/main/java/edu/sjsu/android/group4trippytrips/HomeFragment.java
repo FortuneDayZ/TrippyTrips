@@ -3,7 +3,6 @@ package edu.sjsu.android.group4trippytrips;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +23,7 @@ import com.google.android.libraries.places.api.model.RectangularBounds;
 import com.google.android.libraries.places.api.net.PlacesClient;
 import com.google.android.libraries.places.api.net.SearchByTextRequest;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.button.MaterialButton;
 
 import java.util.Arrays;
 import java.util.Calendar;
@@ -33,6 +33,7 @@ public class HomeFragment extends Fragment {
 
     private Button hotelsButton, restaurantButton, activitiesButton;
     private EditText editTravelers, editDate;
+    private MaterialButton submitButton;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -48,6 +49,7 @@ public class HomeFragment extends Fragment {
         activitiesButton = view.findViewById(R.id.activitiesButton);
         editTravelers = view.findViewById(R.id.editTravelers);
         editDate = view.findViewById(R.id.editDate);
+        submitButton = view.findViewById(R.id.submitButton);
 
         hotelsButton.setOnClickListener(v -> selectCategory(hotelsButton));
         restaurantButton.setOnClickListener(v -> selectCategory(restaurantButton));
@@ -55,6 +57,12 @@ public class HomeFragment extends Fragment {
 
         editTravelers.setOnClickListener(v -> showTravelerPicker());
         editDate.setOnClickListener(v -> showDatePicker());
+
+        // Navigate to search results on "Search" button press
+        submitButton.setOnClickListener(v -> {
+            NavHostFragment.findNavController(HomeFragment.this)
+                    .navigate(R.id.searchResultsFragment);
+        });
 
         selectCategory(hotelsButton);
 
@@ -66,10 +74,7 @@ public class HomeFragment extends Fragment {
         cityTours.setOnClickListener(v -> Toast.makeText(getContext(), "City Tours clicked!", Toast.LENGTH_SHORT).show());
         adventure.setOnClickListener(v -> Toast.makeText(getContext(), "Adventure clicked!", Toast.LENGTH_SHORT).show());
 
-        //  Bottom Navigation logic using if-else instead of switch
         BottomNavigationView bottomNavigation = view.findViewById(R.id.bottom_navigation);
-
-        //  Set currently selected item to Home
         bottomNavigation.setSelectedItemId(R.id.homeFragment);
 
         bottomNavigation.setOnItemSelectedListener(item -> {
@@ -92,7 +97,7 @@ public class HomeFragment extends Fragment {
             return false;
         });
 
-        // --------------------------- TEST CODE ONLY ----------------------------- //
+        // Google Places API test (optional)
         String apiKey = BuildConfig.GROUP_PROJECT_GOOGLE_API_KEY;
         Places.initializeWithNewPlacesApiEnabled(container.getContext(), apiKey);
         PlacesClient placesClient = Places.createClient(container.getContext());
@@ -109,6 +114,7 @@ public class HomeFragment extends Fragment {
         placesClient.searchByText(searchByTextRequest)
                 .addOnSuccessListener(response -> {
                     List<Place> places = response.getPlaces();
+                    // You can log or display results here if needed
                 });
 
         return view;
