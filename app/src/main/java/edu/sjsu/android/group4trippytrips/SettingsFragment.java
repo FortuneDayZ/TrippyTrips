@@ -45,7 +45,6 @@ public class SettingsFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_settings, container, false);
 
-        // ✅ Bottom navigation setup
         BottomNavigationView bottomNavigation = rootView.findViewById(R.id.bottom_navigation);
         bottomNavigation.setSelectedItemId(R.id.settingsFragment);
 

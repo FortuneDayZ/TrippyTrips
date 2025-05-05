@@ -273,7 +273,7 @@
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="25dp"
                 android:layout_marginBottom="32dp"
-                android:text="Submit"
+                android:text="Search"
                 android:textAllCaps="false"
                 android:textColor="@android:color/white"
                 android:textStyle="bold"

@@ -66,10 +66,10 @@ public class HomeFragment extends Fragment {
         cityTours.setOnClickListener(v -> Toast.makeText(getContext(), "City Tours clicked!", Toast.LENGTH_SHORT).show());
         adventure.setOnClickListener(v -> Toast.makeText(getContext(), "Adventure clicked!", Toast.LENGTH_SHORT).show());
 
-        // ✅ Bottom Navigation logic using if-else instead of switch
+        //  Bottom Navigation logic using if-else instead of switch
         BottomNavigationView bottomNavigation = view.findViewById(R.id.bottom_navigation);
 
-        // ✅ Set currently selected item to Home
+        //  Set currently selected item to Home
         bottomNavigation.setSelectedItemId(R.id.homeFragment);
 
         bottomNavigation.setOnItemSelectedListener(item -> {

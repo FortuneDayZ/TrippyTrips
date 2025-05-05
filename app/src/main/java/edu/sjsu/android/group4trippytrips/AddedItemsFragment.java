@@ -4,6 +4,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
@@ -13,69 +17,70 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class AddedItemsFragment extends Fragment {
 
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private LinearLayout cityResultsContainer;
 
-    private String mParam1;
-    private String mParam2;
+    private final String[] savedNames = {
+            "Hotel A", "Pizza Place", "Mountain Hike", "Book Café", "City Museum"
+    };
+    private final String[] savedRatings = {
+            "4/5", "5/5", "3/5", "4.5/5", "5/5"
+    };
+    private final String[] savedLocations = {
+            "New York", "Rome", "Denver", "Kyoto", "Berlin"
+    };
 
-    public AddedItemsFragment() {
-        // Required empty public constructor
-    }
-
-    public static AddedItemsFragment newInstance(String param1, String param2) {
-        AddedItemsFragment fragment = new AddedItemsFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
+    public AddedItemsFragment() {}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_added_items, container, false);
+        cityResultsContainer = rootView.findViewById(R.id.cityResultsContainer);
 
-        // ✅ Setup BottomNavigationView
+        for (int i = 0; i < savedNames.length; i++) {
+            addAddedCard(savedNames[i], savedRatings[i], savedLocations[i]);
+        }
+
         BottomNavigationView bottomNavigation = rootView.findViewById(R.id.bottom_navigation);
-        bottomNavigation.setSelectedItemId(R.id.addedItemsFragment); // Highlight "Saved"
+        bottomNavigation.setSelectedItemId(R.id.addedItemsFragment);
 
-        // ✅ Prevent unnecessary re-navigation
         bottomNavigation.setOnItemSelectedListener(item -> {
             int itemId = item.getItemId();
             NavController navController = NavHostFragment.findNavController(this);
-            int currentId = navController.getCurrentDestination().getId();
-
-            if (itemId == currentId) {
-                return true; // Already on this fragment
-            }
+            if (itemId == navController.getCurrentDestination().getId()) return true;
 
             if (itemId == R.id.homeFragment) {
                 navController.navigate(R.id.homeFragment);
-                return true;
             } else if (itemId == R.id.searchResultsFragment) {
                 navController.navigate(R.id.searchResultsFragment);
-                return true;
-            } else if (itemId == R.id.addedItemsFragment) {
-                return true;
             } else if (itemId == R.id.settingsFragment) {
                 navController.navigate(R.id.settingsFragment);
-                return true;
             }
-
-            return false;
+            return true;
         });
 
         return rootView;
+    }
+
+    private void addAddedCard(String name, String rating, String location) {
+        if (getContext() == null) return;
+
+        LayoutInflater inflater = LayoutInflater.from(getContext());
+        View cardView = inflater.inflate(R.layout.item_added_card, cityResultsContainer, false);
+
+        TextView nameView = cardView.findViewById(R.id.resultName);
+        TextView locationView = cardView.findViewById(R.id.resultLocation);
+        TextView ratingView = cardView.findViewById(R.id.resultRating);
+
+        nameView.setText(name);
+        locationView.setText(location);
+        ratingView.setText(rating);
+
+        ImageView checkIcon = cardView.findViewById(R.id.checkIcon);
+        checkIcon.setOnClickListener(v -> {
+            Toast.makeText(getContext(), "Removed: " + name, Toast.LENGTH_SHORT).show();
+        });
+
+        cityResultsContainer.addView(cardView);
     }
 }
