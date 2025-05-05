@@ -31,14 +31,12 @@
                 android:id="@+id/welcomeTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="45dp"
                 android:gravity="center"
                 android:text="Welcome to TrippyTrips"
                 android:textSize="35sp"
                 android:textStyle="bold"
                 android:textColor="@android:color/black" />
-
-
 
             <!-- Search Bar -->
             <androidx.cardview.widget.CardView
@@ -107,35 +105,41 @@
                 android:gravity="center"
                 android:orientation="horizontal">
 
-                <Button
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/hotelsButton"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
                     android:layout_weight="1"
-                    android:background="@drawable/category_button_selector"
-                    android:drawablePadding="4dp"
+                    android:text="Hotels"
                     android:drawableTop="@drawable/ic_hotel"
+                    android:drawablePadding="4dp"
                     android:gravity="center"
-                    android:text="Hotels" />
+                    android:textColor="@android:color/white"
+                    android:backgroundTint="@color/blue"
+                    app:cornerRadius="12dp" />
 
-                <Button
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/flightsButton"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="8dp"
                     android:layout_weight="1"
-                    android:background="@drawable/category_button_selector"
-                    android:text="Flights" />
+                    android:text="Flights"
+                    android:textColor="@android:color/white"
+                    android:backgroundTint="@color/blue"
+                    app:cornerRadius="12dp" />
 
-                <Button
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/activitiesButton"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_weight="1"
-                    android:background="@drawable/category_button_selector"
-                    android:text="Activities" />
+                    android:text="Activities"
+                    android:textColor="@android:color/white"
+                    android:backgroundTint="@color/blue"
+                    app:cornerRadius="12dp" />
             </LinearLayout>
 
             <!-- Popular Categories Title -->
@@ -147,7 +151,8 @@
                 android:layout_marginStart="16dp"
                 android:text="Popular Categories"
                 android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:textColor="@android:color/black" />
 
             <!-- Category Section -->
             <LinearLayout
@@ -257,19 +262,22 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <Button
+            <!-- Submit Button -->
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/submitButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="25dp"
                 android:layout_marginBottom="32dp"
                 android:text="Submit"
                 android:textAllCaps="false"
                 android:textColor="@android:color/white"
                 android:textStyle="bold"
                 android:textSize="16sp"
-                android:paddingVertical="14dp" />
+                android:paddingVertical="14dp"
+                android:backgroundTint="@color/blue"
+                app:cornerRadius="12dp" />
 
         </LinearLayout>
     </ScrollView>
