@@ -31,7 +31,7 @@ import java.util.List;
 
 public class HomeFragment extends Fragment {
 
-    private Button hotelsButton, flightsButton, activitiesButton;
+    private Button hotelsButton, restaurantButton, activitiesButton;
     private EditText editTravelers, editDate;
 
     public HomeFragment() {
@@ -44,13 +44,13 @@ public class HomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
         hotelsButton = view.findViewById(R.id.hotelsButton);
-        flightsButton = view.findViewById(R.id.flightsButton);
+        restaurantButton = view.findViewById(R.id.restaurantButton);
         activitiesButton = view.findViewById(R.id.activitiesButton);
         editTravelers = view.findViewById(R.id.editTravelers);
         editDate = view.findViewById(R.id.editDate);
 
         hotelsButton.setOnClickListener(v -> selectCategory(hotelsButton));
-        flightsButton.setOnClickListener(v -> selectCategory(flightsButton));
+        restaurantButton.setOnClickListener(v -> selectCategory(restaurantButton));
         activitiesButton.setOnClickListener(v -> selectCategory(activitiesButton));
 
         editTravelers.setOnClickListener(v -> showTravelerPicker());
@@ -93,29 +93,19 @@ public class HomeFragment extends Fragment {
         });
 
         // --------------------------- TEST CODE ONLY ----------------------------- //
-        // Define a variable to hold the Places API key.
         String apiKey = BuildConfig.GROUP_PROJECT_GOOGLE_API_KEY;
-
-        // Initialize the SDK
         Places.initializeWithNewPlacesApiEnabled(container.getContext(), apiKey);
-
-        // Create a new PlacesClient instance
         PlacesClient placesClient = Places.createClient(container.getContext());
 
-        // Specify the list of fields to return.
         final List<Place.Field> placeFields = Arrays.asList(Place.Field.ID, Place.Field.DISPLAY_NAME);
 
-        // Define latitude and longitude coordinates of the search area.
         LatLng southWest = new LatLng(37.38816277477739, -122.08813770258874);
         LatLng northEast = new LatLng(37.39580487866437, -122.07702325966572);
 
-        // Use the builder to create a SearchByTextRequest object.
         final SearchByTextRequest searchByTextRequest = SearchByTextRequest.builder("Spicy Vegetarian Food", placeFields)
                 .setMaxResultCount(10)
                 .setLocationRestriction(RectangularBounds.newInstance(southWest, northEast)).build();
 
-        // Call PlacesClient.searchByText() to perform the search.
-        // Define a response handler to process the returned List of Place objects.
         placesClient.searchByText(searchByTextRequest)
                 .addOnSuccessListener(response -> {
                     List<Place> places = response.getPlaces();
@@ -125,7 +115,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void selectCategory(Button selectedButton) {
-        Button[] buttons = {hotelsButton, flightsButton, activitiesButton};
+        Button[] buttons = {hotelsButton, restaurantButton, activitiesButton};
 
         for (Button btn : buttons) {
             btn.setSelected(false);
@@ -146,8 +136,8 @@ public class HomeFragment extends Fragment {
     private int getIconForButton(Button button, boolean selected) {
         if (button.getId() == R.id.hotelsButton) {
             return selected ? R.drawable.ic_hotel_white : R.drawable.ic_hotel;
-        } else if (button.getId() == R.id.flightsButton) {
-            return selected ? R.drawable.ic_flight_white : R.drawable.ic_flight;
+        } else if (button.getId() == R.id.restaurantButton) {
+            return selected ? R.drawable.ic_restaurant_white : R.drawable.ic_restaurant;
         } else {
             return selected ? R.drawable.ic_activity_white : R.drawable.ic_activity;
         }

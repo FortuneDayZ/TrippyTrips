@@ -120,12 +120,15 @@
                     app:cornerRadius="12dp" />
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/flightsButton"
+                    android:id="@+id/restaurantButton"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="8dp"
                     android:layout_weight="1"
-                    android:text="Flights"
+                    android:text="Restaurant"
+                    android:drawableTop="@drawable/ic_restaurant"
+                    android:drawablePadding="4dp"
+                    android:gravity="center"
                     android:textColor="@android:color/white"
                     android:backgroundTint="@color/blue"
                     app:cornerRadius="12dp" />
