@@ -1,6 +1,8 @@
 package edu.sjsu.android.group4trippytrips;
 
 import android.content.ContentValues;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -51,7 +53,8 @@ public class AuthenticateFragment extends Fragment {
                         null
                 )) {
                     if (cursor != null && cursor.moveToFirst()) {
-
+                        SharedPreferences prefs = requireActivity().getSharedPreferences("user_prefs", Context.MODE_PRIVATE);
+                        prefs.edit().putString("username", username).apply();
                         NavHostFragment.findNavController(AuthenticateFragment.this)
                                 .navigate(R.id.action_loginFragment_to_homeFragment);
                     } else {

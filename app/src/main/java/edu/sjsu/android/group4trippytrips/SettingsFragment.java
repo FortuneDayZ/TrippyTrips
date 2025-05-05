@@ -1,10 +1,15 @@
 package edu.sjsu.android.group4trippytrips;
 
 import android.app.AlertDialog;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
@@ -48,6 +53,10 @@ public class SettingsFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_settings, container, false);
 
+        //Setup username of current user for setting changes
+        SharedPreferences prefs = requireActivity().getSharedPreferences("user_prefs", Context.MODE_PRIVATE);
+        String username = prefs.getString("username", null);
+
         // Setup bottom navigation
         BottomNavigationView bottomNavigation = rootView.findViewById(R.id.bottom_navigation);
         bottomNavigation.setSelectedItemId(R.id.settingsFragment);
@@ -80,6 +89,7 @@ public class SettingsFragment extends Fragment {
         logoutButton.setOnClickListener(v -> {
             v.setEnabled(false); // Prevent double tap
             hideBottomNav();     // Optional: hide nav bar
+            prefs.edit().clear().apply();
             navController.navigate(R.id.action_settingsFragment_to_welcomePage);
         });
 
@@ -93,7 +103,23 @@ public class SettingsFragment extends Fragment {
                         v.setEnabled(false); // Prevent double tap
                         hideBottomNav();     // Optional
                         // TODO: delete account from database or backend if needed
-                        navController.navigate(R.id.action_settingsFragment_to_welcomePage);
+
+                        if (username != null) {
+                            // Now you can delete the account
+                            int result = requireContext().getContentResolver().delete(
+                                    Uri.parse("content://edu.sjsu.android.group4trippytrips.authenticate"),
+                                    username,
+                                    null
+                            );
+                            //Delete successful
+                            if(result > 0) {
+                                prefs.edit().clear().apply();
+                                navController.navigate(R.id.action_settingsFragment_to_welcomePage);
+                            }
+                            else{
+                                Toast.makeText(getActivity(), "Account not deleted. Try again later.", Toast.LENGTH_LONG).show();
+                            }
+                        }
                     })
                     .setNegativeButton("Cancel", null)
                     .show();
