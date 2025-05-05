@@ -92,12 +92,6 @@ public class AuthenticateFragment extends Fragment {
             }
         });
 
-        // TEMPORARY: Button to skip to HomeFragment
-        Button tempButtonGoHome = view.findViewById(R.id.tempButtonGoHome);
-        tempButtonGoHome.setOnClickListener(v ->
-                NavHostFragment.findNavController(AuthenticateFragment.this)
-                        .navigate(R.id.action_loginFragment_to_homeFragment)
-        );
 
         return view;
     }

@@ -40,5 +40,12 @@
     <fragment
         android:id="@+id/settingsFragment"
         android:name="edu.sjsu.android.group4trippytrips.SettingsFragment"
-        android:label="Settings Page" />
+        android:label="Settings Page">
+        <action
+            android:id="@+id/action_settingsFragment_to_welcomePage"
+            app:destination="@id/welcomePage"
+            app:popUpTo="@id/welcomePage"
+            app:popUpToInclusive="true" />
+    </fragment>
+
 </navigation>
