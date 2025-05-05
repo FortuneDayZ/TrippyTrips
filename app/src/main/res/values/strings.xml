@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Trippy Trips</string>
-    <string name="welcome_text">Welcome to\n\nTrippy Trips!</string> <string name="welcome_instructions">Please log in or sign up to get started!</string> <string name="log_in">LOG IN</string>
+    <string name="welcome_text">Welcome to\n\nTrippy Trips!</string>
+    <string name="welcome_instructions">Please log in or sign up to get started!</string>
+    <string name="log_in">LOG IN</string>
     <string name="sign_up">SIGN UP</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="enter_password">Enter Password</string>
@@ -17,13 +19,10 @@
     <string name="this_action_cannot_be_reversed">This action cannot be reversed!</string>
     <string name="home">HOME</string>
     <string name="enter_new_password_here">Enter new password here</string>
-
-    <string name="welcome_illustration_desc">Travel destinations collage</string> <string name="welcome_headline"><![CDATA[Your next trip<br/>starts <font color="@color/gold"><b>here</b></font>]]></string>
-
+    <string name="welcome_illustration_desc">Travel destinations collage</string>
+    <string name="welcome_headline"><![CDATA[Your next trip<br/>starts <font color="@color/gold"><b>here</b></font>]]></string>
     <string name="welcome_instructions_detailed">Plan your perfect getaway with Trippy Trips. Explore destinations, and find great places to stay and things to do.</string>
-
     <string name="app_logo">App logo</string>
-
     <string name="get_started">Get Started</string>
-
+    <string name="log_out">Log Out</string>
 </resources>

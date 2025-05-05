@@ -8,7 +8,6 @@
     android:background="#FFFFFF"
     tools:context=".SettingsFragment">
 
-    <!-- Scrollable content -->
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="0dp"
@@ -26,7 +25,6 @@
             android:orientation="vertical"
             android:paddingBottom="24dp">
 
-            <!-- Settings Title -->
             <TextView
                 android:id="@+id/settingsTitle"
                 android:layout_width="match_parent"
@@ -34,11 +32,10 @@
                 android:layout_marginTop="45dp"
                 android:gravity="center"
                 android:text="@string/settings"
-                android:textSize="35sp"
+                android:textSize="40sp"
                 android:textStyle="bold"
                 android:textColor="@android:color/black" />
 
-            <!-- Change Password Section -->
             <TextView
                 android:id="@+id/changePassword"
                 android:layout_width="match_parent"
@@ -46,37 +43,54 @@
                 android:layout_marginTop="30dp"
                 android:layout_marginHorizontal="16dp"
                 android:text="@string/change_password"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/black" />
 
-            <EditText
-                android:id="@+id/newPassword"
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginHorizontal="16dp"
-                android:hint="@string/enter_new_password_here"
-                android:inputType="textPassword"
-                android:padding="12dp" />
+                app:cardCornerRadius="12dp"
+                app:cardElevation="4dp">
 
-            <Button
+                <EditText
+                    android:id="@+id/newPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/enter_new_password_here"
+                    android:inputType="textPassword"
+                    android:padding="16dp"
+                    android:textSize="17sp"
+                    android:background="@android:color/transparent"/>
+            </androidx.cardview.widget.CardView>
+
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:layout_marginHorizontal="16dp"
-                android:text="@string/submit" />
+                android:text="@string/submit"
+                android:textColor="@android:color/white"
+                android:backgroundTint="@color/blue"
+                app:cornerRadius="12dp"
+                android:textStyle="bold"
+                android:textSize="17sp"
+                android:textAllCaps="false"
+                android:paddingVertical="16dp"/>
 
-            <!-- Clear Data Section -->
             <TextView
                 android:id="@+id/clearData"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="40dp"
                 android:layout_marginHorizontal="16dp"
                 android:text="@string/please_click_the_button_below_to_clear_all_the_user_data"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/black" />
 
             <TextView
                 android:id="@+id/dangerNote"
@@ -85,26 +99,34 @@
                 android:layout_marginTop="4dp"
                 android:layout_marginHorizontal="16dp"
                 android:text="@string/this_action_cannot_be_reversed"
-                android:textSize="14sp" />
+                android:textSize="20sp"
+                android:textColor="#B00020" />
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/clearDataButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:layout_marginHorizontal="16dp"
-                android:text="@string/clear_my_data" />
+                android:text="@string/clear_my_data"
+                android:textColor="@android:color/white"
+                android:backgroundTint="@color/blue"
+                app:cornerRadius="12dp"
+                android:textStyle="bold"
+                android:textSize="17sp"
+                android:textAllCaps="false"
+                android:paddingVertical="16dp"/>
 
-            <!-- Delete Account Section -->
             <TextView
                 android:id="@+id/deleteAccount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="40dp"
                 android:layout_marginHorizontal="16dp"
                 android:text="@string/please_click_the_button_below_to_delete_your_account"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/black" />
 
             <TextView
                 android:id="@+id/dangerNote2"
@@ -113,20 +135,44 @@
                 android:layout_marginTop="4dp"
                 android:layout_marginHorizontal="16dp"
                 android:text="@string/this_action_cannot_be_reversed"
-                android:textSize="14sp" />
+                android:textSize="20sp"
+                android:textColor="#B00020" />
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/deleteAccountButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:layout_marginHorizontal="16dp"
-                android:text="@string/delete_account" />
+                android:text="@string/delete_account"
+                android:textColor="@android:color/white"
+                android:backgroundTint="@color/blue"
+                app:cornerRadius="12dp"
+                android:textStyle="bold"
+                android:textSize="17sp"
+                android:textAllCaps="false"
+                android:paddingVertical="16dp"/>
+
+            <!-- Log Out Button -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/logoutButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:layout_marginBottom="24dp"
+                android:layout_marginHorizontal="16dp"
+                android:text="@string/log_out"
+                android:textColor="@android:color/white"
+                android:backgroundTint="@color/blue"
+                app:cornerRadius="12dp"
+                android:textStyle="bold"
+                android:textSize="17sp"
+                android:textAllCaps="false"
+                android:paddingVertical="16dp"/>
 
         </LinearLayout>
     </ScrollView>
 
-    <!-- Divider -->
     <View
         android:id="@+id/divider"
         android:layout_width="0dp"
@@ -136,7 +182,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Bottom Navigation -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="0dp"
