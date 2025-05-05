@@ -1,6 +1,7 @@
 package edu.sjsu.android.group4trippytrips;
 
 import android.app.AlertDialog;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -9,6 +10,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -83,6 +85,33 @@ public class SettingsFragment extends Fragment {
 
         // Navigation controller
         NavController navController = NavHostFragment.findNavController(SettingsFragment.this);
+
+        MaterialButton changeButton = rootView.findViewById(R.id.button);
+        EditText passwordField = rootView.findViewById(R.id.newPassword);
+        changeButton.setOnClickListener(v -> {
+            v.setEnabled(false); // Prevent double tap
+            String password = passwordField.getText().toString().trim();
+            ContentValues content = new ContentValues();
+            content.put("password", password);
+            if(password.isEmpty())
+            {
+
+            }
+            else {
+                int result = requireContext().getContentResolver().update(
+                        Uri.parse("content://edu.sjsu.android.group4trippytrips.authenticate"),
+                        content,
+                        username,
+                        null
+                );
+                if(result > 0){
+                    Toast.makeText(getActivity(), "Password Changed", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    Toast.makeText(getActivity(), "Password not changed, please try again later.", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
 
         // Logout button
         MaterialButton logoutButton = rootView.findViewById(R.id.logoutButton);
