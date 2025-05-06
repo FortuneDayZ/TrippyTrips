@@ -1,7 +1,9 @@
 package edu.sjsu.android.group4trippytrips;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -122,19 +124,18 @@ public class SearchResultsFragment extends Fragment {
         ratingView.setText(rating);
 
         ImageView plusIcon = cardView.findViewById(R.id.plusIcon);
-        plusIcon.setOnClickListener(v ->
+        plusIcon.setOnClickListener(v -> {
                 ContentValues content = new ContentValues();
-        content.put("name", name);
-        content.put("address", location);
-        content.put("rating", rating);
-        Uri result = requireContext().getContentResolver().insert(
-                Uri.parse("content://edu.sjsu.android.group4trippytrips.locations"),
-                content
-        );
-        if(result != null) {
-            Toast.makeText(getContext(), name + " added!", Toast.LENGTH_SHORT).show();
-        }
-
+                content.put("name", name);
+                content.put("address", location);
+                content.put("rating", rating);
+                Uri result = requireContext().getContentResolver().insert(
+                        Uri.parse("content://edu.sjsu.android.group4trippytrips.locations"),
+                        content);
+                if(result != null) {
+                    Toast.makeText(getContext(), name + " added!", Toast.LENGTH_SHORT).show();
+                }
+        });
         cityResultsContainer.addView(cardView);
     }
 }
