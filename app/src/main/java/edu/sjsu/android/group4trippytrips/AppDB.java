@@ -93,9 +93,10 @@ public class AppDB extends SQLiteOpenHelper {
     }
 
     public int deleteLocation(String username, String name){
-        String where = String.format("username=%s and name=%s", username, name);
+        String where = "username=? AND name=?";
+        String[] args = new String[] {username, name};
         SQLiteDatabase db = getWritableDatabase();
-        return db.delete(LOCATION_TABLE_NAME, where, null);
+        return db.delete(LOCATION_TABLE_NAME, where, args);
     }
 
 }

@@ -1,8 +1,11 @@
 package edu.sjsu.android.group4trippytrips;
 
+import static com.google.common.reflect.Reflection.getPackageName;
+
 import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
@@ -18,6 +21,9 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.button.MaterialButton$InspectionCompanion;
+
+import java.util.Objects;
 
 public class SettingsFragment extends Fragment {
 
@@ -151,6 +157,14 @@ public class SettingsFragment extends Fragment {
                     })
                     .setNegativeButton("Cancel", null)
                     .show();
+        });
+
+        // Uninstall App
+        MaterialButton uninstall = rootView.findViewById(R.id.uninstallButton);
+        uninstall.setOnClickListener(v -> {
+            Intent delete = new Intent(Intent.ACTION_DELETE,
+                    Uri.parse("package:" + requireActivity().getPackageName()));
+            startActivity(delete);
         });
 
         return rootView;
