@@ -56,6 +56,27 @@ public class HomeFragment extends Fragment {
         submitButton.setOnClickListener(v -> {
             EditText input = view.findViewById(R.id.searchBar);
             String userInput = input.getText().toString().trim();
+            String travelers = editTravelers.getText().toString().trim();
+            String date = editDate.getText().toString().trim();
+
+            // Check for missing fields
+            StringBuilder errorMessage = new StringBuilder();
+            if (userInput.isEmpty()) {
+                errorMessage.append("• Please enter a destination.\n");
+            }
+            if (travelers.isEmpty()) {
+                errorMessage.append("• Please select the number of travelers.\n");
+            }
+            if (date.isEmpty()) {
+                errorMessage.append("• Please select a date.\n");
+            }
+
+            if (errorMessage.length() > 0) {
+                Toast.makeText(getContext(), errorMessage.toString().trim(), Toast.LENGTH_LONG).show();
+                return;
+            }
+
+            // If all fields are filled, save and navigate
             String fullQuery = selectedCategoryPrefix + userInput;
 
             SharedPreferences prefs = requireActivity().getSharedPreferences("user_prefs", Context.MODE_PRIVATE);

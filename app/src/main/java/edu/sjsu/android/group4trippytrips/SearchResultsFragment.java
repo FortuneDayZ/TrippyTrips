@@ -121,7 +121,7 @@ public class SearchResultsFragment extends Fragment {
 
         nameView.setText(name);
         locationView.setText(location);
-        ratingView.setText(rating);
+        ratingView.setText(rating + "/5");
 
         ImageView plusIcon = cardView.findViewById(R.id.plusIcon);
         plusIcon.setOnClickListener(v -> {
