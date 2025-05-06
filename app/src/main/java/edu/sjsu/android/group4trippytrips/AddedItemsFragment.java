@@ -14,13 +14,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-import java.util.Objects;
 
 public class AddedItemsFragment extends Fragment {
 
@@ -34,7 +31,7 @@ public class AddedItemsFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_added_items, container, false);
         cityResultsContainer = rootView.findViewById(R.id.cityResultsContainer);
 
-        // Get current username for filtering saved items (if needed)
+        // Get current username
         SharedPreferences prefs = requireActivity().getSharedPreferences("user_prefs", Context.MODE_PRIVATE);
         String username = prefs.getString("username", null);
 
@@ -94,14 +91,23 @@ public class AddedItemsFragment extends Fragment {
 
         ImageView checkIcon = cardView.findViewById(R.id.checkIcon);
         checkIcon.setOnClickListener(v -> {
-//            Toast.makeText(getContext(), "Removed: " + name, Toast.LENGTH_SHORT).show();
             SharedPreferences prefs = requireActivity().getSharedPreferences("user_prefs", Context.MODE_PRIVATE);
             String username = prefs.getString("username", null);
             int result = requireContext().getContentResolver().delete(
                     Uri.parse("content://edu.sjsu.android.group4trippytrips.locations"),
                     username,
-                    new String[] {name}
+                    new String[]{name}
             );
+
+            if (result > 0) {
+                Toast.makeText(getContext(), "Removed: " + name, Toast.LENGTH_SHORT).show();
+
+                // Refresh fragment via NavController
+                NavHostFragment.findNavController(AddedItemsFragment.this)
+                        .navigate(R.id.addedItemsFragment);
+            } else {
+                Toast.makeText(getContext(), "Failed to remove: " + name, Toast.LENGTH_SHORT).show();
+            }
         });
 
         cityResultsContainer.addView(cardView);
