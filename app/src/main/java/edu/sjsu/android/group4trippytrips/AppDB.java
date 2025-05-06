@@ -29,14 +29,16 @@ public class AppDB extends SQLiteOpenHelper {
     protected static final String LOCATIONS_ID = "_id";
     protected static final String LOCATION_NAME = "name";
     protected static final String LOCATION_ADDRESS = "address";
+    protected static final String LOCATION_RATING = "rating";
     private static final String LOCATION_CREATE_TABLE =
             String.format("CREATE TABLE %s (" +
                     "%s INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     "%s STRING NOT NULL, " +
                     "%s STRING NOT NULL, " +
                     "%s STRING NOT NULL, " +
+                    "%s STRING NOT NULL, " +
                     "FOREIGN KEY(%s) REFERENCES %s(%s));",
-                    LOCATION_TABLE_NAME, LOCATIONS_ID, USERNAME, LOCATION_NAME, LOCATION_ADDRESS,
+                    LOCATION_TABLE_NAME, LOCATIONS_ID, USERNAME, LOCATION_NAME, LOCATION_ADDRESS,LOCATION_RATING,
                     USERNAME, LOGIN_TABLE_NAME, USERNAME);
 
     public AppDB(@Nullable Context context) {
