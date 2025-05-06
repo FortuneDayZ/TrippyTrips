@@ -125,16 +125,19 @@ public class SearchResultsFragment extends Fragment {
 
         ImageView plusIcon = cardView.findViewById(R.id.plusIcon);
         plusIcon.setOnClickListener(v -> {
-                ContentValues content = new ContentValues();
-                content.put("name", name);
-                content.put("address", location);
-                content.put("rating", rating);
-                Uri result = requireContext().getContentResolver().insert(
-                        Uri.parse("content://edu.sjsu.android.group4trippytrips.locations"),
-                        content);
-                if(result != null) {
-                    Toast.makeText(getContext(), name + " added!", Toast.LENGTH_SHORT).show();
-                }
+            SharedPreferences prefs = requireActivity().getSharedPreferences("user_prefs", Context.MODE_PRIVATE);
+            String username = prefs.getString("username", null);
+            ContentValues content = new ContentValues();
+            content.put(AppDB.USERNAME, username);
+            content.put(AppDB.LOCATION_NAME, name);
+            content.put(AppDB.LOCATION_ADDRESS, location);
+            content.put(AppDB.LOCATION_RATING, rating);
+            Uri result = requireContext().getContentResolver().insert(
+                    Uri.parse("content://edu.sjsu.android.group4trippytrips.locations"),
+                    content);
+            if(result != null) {
+                Toast.makeText(getContext(), name + " added!", Toast.LENGTH_SHORT).show();
+            }
         });
         cityResultsContainer.addView(cardView);
     }

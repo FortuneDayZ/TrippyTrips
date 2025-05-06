@@ -42,11 +42,15 @@ public class AddedItemsFragment extends Fragment {
                 null
         );
         if(cursor != null && cursor.moveToFirst()){
+            String name = cursor.getString(cursor.getColumnIndexOrThrow("name"));
+            String address = cursor.getString(cursor.getColumnIndexOrThrow("address"));
+            double rating = cursor.getFloat(cursor.getColumnIndexOrThrow("rating"));
+            addAddedCard(name, String.valueOf(rating), address);
             try {
                 while (cursor.moveToNext()) {
-                    String name = cursor.getString(cursor.getColumnIndexOrThrow("name"));
-                    String address = cursor.getString(cursor.getColumnIndexOrThrow("address"));
-                    double rating = cursor.getFloat(cursor.getColumnIndexOrThrow("rating"));
+                    name = cursor.getString(cursor.getColumnIndexOrThrow("name"));
+                    address = cursor.getString(cursor.getColumnIndexOrThrow("address"));
+                    rating = cursor.getFloat(cursor.getColumnIndexOrThrow("rating"));
                     addAddedCard(name, String.valueOf(rating), address);
                 }
             } finally {

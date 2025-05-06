@@ -34,7 +34,6 @@ public class LocationProvider extends ContentProvider {
     @Override
     public Cursor query(@NonNull Uri uri, String[] projection, String selection,
                         String[] selectionArgs, String sortOrder) {
-        assert selectionArgs != null;
         return db.getLocations(selection);
     }
 

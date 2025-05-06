@@ -82,13 +82,14 @@ public class AppDB extends SQLiteOpenHelper {
 
     public long insertLocation(ContentValues contentValues){
         SQLiteDatabase database = getWritableDatabase();
-        return database.insert(LOGIN_TABLE_NAME, null, contentValues);
+        return database.insert(LOCATION_TABLE_NAME, null, contentValues);
     }
 
     public Cursor getLocations(String username){
-        String where = String.format("username=%s", username);
+        String where = "username=?";
+        String[] args = new String[] {username};
         SQLiteDatabase db = getWritableDatabase();
-        return db.query(LOCATION_TABLE_NAME, null, where, null, null, null, null);
+        return db.query(LOCATION_TABLE_NAME, null, where, args, null, null, null);
     }
 
     public int deleteLocation(String username, String name){
