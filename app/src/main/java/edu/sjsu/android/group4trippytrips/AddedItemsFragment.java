@@ -31,31 +31,27 @@ public class AddedItemsFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_added_items, container, false);
         cityResultsContainer = rootView.findViewById(R.id.cityResultsContainer);
 
-        //Setup username of current user for setting changes
+        // Get current username for filtering saved items (if needed)
         SharedPreferences prefs = requireActivity().getSharedPreferences("user_prefs", Context.MODE_PRIVATE);
         String username = prefs.getString("username", null);
-        Cursor cursor =  requireContext().getContentResolver().query(
+
+        Cursor cursor = requireContext().getContentResolver().query(
                 Uri.parse("content://edu.sjsu.android.group4trippytrips.locations"),
                 null,
                 username,
                 null,
                 null
         );
-        if(cursor != null && cursor.moveToFirst()){
-            String name = cursor.getString(cursor.getColumnIndexOrThrow("name"));
-            String address = cursor.getString(cursor.getColumnIndexOrThrow("address"));
-            double rating = cursor.getFloat(cursor.getColumnIndexOrThrow("rating"));
-            addAddedCard(name, String.valueOf(rating), address);
-            try {
-                while (cursor.moveToNext()) {
-                    name = cursor.getString(cursor.getColumnIndexOrThrow("name"));
-                    address = cursor.getString(cursor.getColumnIndexOrThrow("address"));
-                    rating = cursor.getFloat(cursor.getColumnIndexOrThrow("rating"));
-                    addAddedCard(name, String.valueOf(rating), address);
-                }
-            } finally {
-                cursor.close();
-            }
+
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                String name = cursor.getString(cursor.getColumnIndexOrThrow("name"));
+                String address = cursor.getString(cursor.getColumnIndexOrThrow("address"));
+                float rating = cursor.getFloat(cursor.getColumnIndexOrThrow("rating"));
+                addAddedCard(name, rating, address);
+            } while (cursor.moveToNext());
+
+            cursor.close();
         }
 
         BottomNavigationView bottomNavigation = rootView.findViewById(R.id.bottom_navigation);
@@ -79,7 +75,7 @@ public class AddedItemsFragment extends Fragment {
         return rootView;
     }
 
-    private void addAddedCard(String name, String rating, String location) {
+    private void addAddedCard(String name, float rating, String location) {
         if (getContext() == null) return;
 
         LayoutInflater inflater = LayoutInflater.from(getContext());
@@ -91,11 +87,12 @@ public class AddedItemsFragment extends Fragment {
 
         nameView.setText(name);
         locationView.setText(location);
-        ratingView.setText(rating);
+        ratingView.setText(String.format("%.1f/5", rating));
 
         ImageView checkIcon = cardView.findViewById(R.id.checkIcon);
         checkIcon.setOnClickListener(v -> {
             Toast.makeText(getContext(), "Removed: " + name, Toast.LENGTH_SHORT).show();
+            // Optional: implement deletion from DB here
         });
 
         cityResultsContainer.addView(cardView);

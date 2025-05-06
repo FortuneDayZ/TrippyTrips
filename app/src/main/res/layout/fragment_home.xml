@@ -226,7 +226,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="6dp"
-                        android:text="City Tours"
+                        android:text="Landmarks"
                         android:textAlignment="center"
                         android:textColor="@android:color/black"
                         android:textSize="16sp" />
