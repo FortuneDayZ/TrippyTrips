@@ -14,10 +14,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import java.util.Objects;
 
 public class AddedItemsFragment extends Fragment {
 
@@ -91,8 +94,14 @@ public class AddedItemsFragment extends Fragment {
 
         ImageView checkIcon = cardView.findViewById(R.id.checkIcon);
         checkIcon.setOnClickListener(v -> {
-            Toast.makeText(getContext(), "Removed: " + name, Toast.LENGTH_SHORT).show();
-            // Optional: implement deletion from DB here
+//            Toast.makeText(getContext(), "Removed: " + name, Toast.LENGTH_SHORT).show();
+            SharedPreferences prefs = requireActivity().getSharedPreferences("user_prefs", Context.MODE_PRIVATE);
+            String username = prefs.getString("username", null);
+            int result = requireContext().getContentResolver().delete(
+                    Uri.parse("content://edu.sjsu.android.group4trippytrips.locations"),
+                    username,
+                    new String[] {name}
+            );
         });
 
         cityResultsContainer.addView(cardView);
