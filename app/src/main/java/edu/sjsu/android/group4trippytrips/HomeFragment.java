@@ -92,9 +92,9 @@ public class HomeFragment extends Fragment {
         LinearLayout cityTours = view.findViewById(R.id.cityToursLayout);
         LinearLayout adventure = view.findViewById(R.id.adventureLayout);
 
-        beachTrips.setOnClickListener(v -> Toast.makeText(getContext(), "Beach Trips clicked!", Toast.LENGTH_SHORT).show());
-        cityTours.setOnClickListener(v -> Toast.makeText(getContext(), "City Tours clicked!", Toast.LENGTH_SHORT).show());
-        adventure.setOnClickListener(v -> Toast.makeText(getContext(), "Adventure clicked!", Toast.LENGTH_SHORT).show());
+        beachTrips.setOnClickListener(v -> showCategoryConfirmation("Beaches nearby"));
+        cityTours.setOnClickListener(v -> showCategoryConfirmation("Landmarks nearby"));
+        adventure.setOnClickListener(v -> showCategoryConfirmation("Activities nearby"));
 
         BottomNavigationView bottomNavigation = view.findViewById(R.id.bottom_navigation);
         bottomNavigation.setSelectedItemId(R.id.homeFragment);
@@ -120,6 +120,35 @@ public class HomeFragment extends Fragment {
         });
 
         return view;
+    }
+
+    private void showCategoryConfirmation(String keyword) {
+        new AlertDialog.Builder(requireContext())
+                .setTitle("Confirm Search")
+                .setMessage("Search for \"" + keyword + "\"?")
+                .setPositiveButton("Yes", (dialog, which) -> autoSearch(keyword))
+                .setNegativeButton("Cancel", null)
+                .show();
+    }
+
+    private void autoSearch(String keyword) {
+        Calendar calendar = Calendar.getInstance();
+        String today = (calendar.get(Calendar.MONTH) + 1) + "/" +
+                calendar.get(Calendar.DAY_OF_MONTH) + "/" +
+                calendar.get(Calendar.YEAR);
+
+        SharedPreferences prefs = requireActivity().getSharedPreferences("user_prefs", Context.MODE_PRIVATE);
+        prefs.edit()
+                .putString("location", keyword)
+                .putString("travelers", "1 Traveler")
+                .putString("date", today)
+                .apply();
+
+        editTravelers.setText("1 Traveler");
+        editDate.setText(today);
+
+        NavHostFragment.findNavController(HomeFragment.this)
+                .navigate(R.id.searchResultsFragment);
     }
 
     private void selectCategory(Button selectedButton) {
