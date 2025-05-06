@@ -18,24 +18,17 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.libraries.places.api.Places;
-import com.google.android.libraries.places.api.model.Place;
-import com.google.android.libraries.places.api.model.RectangularBounds;
-import com.google.android.libraries.places.api.net.PlacesClient;
-import com.google.android.libraries.places.api.net.SearchByTextRequest;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.button.MaterialButton;
 
-import java.util.Arrays;
 import java.util.Calendar;
-import java.util.List;
 
 public class HomeFragment extends Fragment {
 
     private Button hotelsButton, restaurantButton, activitiesButton;
     private EditText editTravelers, editDate;
     private MaterialButton submitButton;
+    private String selectedCategoryPrefix = "Hotels in "; // Default prefix
 
     public HomeFragment() {
         // Required empty public constructor
@@ -60,16 +53,19 @@ public class HomeFragment extends Fragment {
         editTravelers.setOnClickListener(v -> showTravelerPicker());
         editDate.setOnClickListener(v -> showDatePicker());
 
-        // Navigate to search results on "Search" button press
         submitButton.setOnClickListener(v -> {
             EditText input = view.findViewById(R.id.searchBar);
+            String userInput = input.getText().toString().trim();
+            String fullQuery = selectedCategoryPrefix + userInput;
+
             SharedPreferences prefs = requireActivity().getSharedPreferences("user_prefs", Context.MODE_PRIVATE);
-            prefs.edit().putString("location", input.getText().toString()).apply();
+            prefs.edit().putString("location", fullQuery).apply();
+
             NavHostFragment.findNavController(HomeFragment.this)
                     .navigate(R.id.searchResultsFragment);
         });
 
-        selectCategory(hotelsButton);
+        selectCategory(hotelsButton); // default selection
 
         LinearLayout beachTrips = view.findViewById(R.id.beachTripsLayout);
         LinearLayout cityTours = view.findViewById(R.id.cityToursLayout);
@@ -122,6 +118,15 @@ public class HomeFragment extends Fragment {
         selectedButton.setCompoundDrawablesWithIntrinsicBounds(null,
                 ContextCompat.getDrawable(requireContext(), getIconForButton(selectedButton, true)),
                 null, null);
+
+        // Update invisible category prefix
+        if (selectedButton.getId() == R.id.hotelsButton) {
+            selectedCategoryPrefix = "Hotels in ";
+        } else if (selectedButton.getId() == R.id.restaurantButton) {
+            selectedCategoryPrefix = "Restaurants in ";
+        } else if (selectedButton.getId() == R.id.activitiesButton) {
+            selectedCategoryPrefix = "Activities in ";
+        }
     }
 
     private int getIconForButton(Button button, boolean selected) {
