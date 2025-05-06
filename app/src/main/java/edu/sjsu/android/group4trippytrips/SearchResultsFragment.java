@@ -1,5 +1,7 @@
 package edu.sjsu.android.group4trippytrips;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +14,16 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.libraries.places.api.Places;
+import com.google.android.libraries.places.api.model.Place;
+import com.google.android.libraries.places.api.model.RectangularBounds;
+import com.google.android.libraries.places.api.net.PlacesClient;
+import com.google.android.libraries.places.api.net.SearchByTextRequest;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class SearchResultsFragment extends Fragment {
 
@@ -47,16 +58,37 @@ public class SearchResultsFragment extends Fragment {
             return false;
         });
 
-        // Temporary mock data (for testing layout only — replace with real data later)
-        String[] names = {"Hotel A", "Sushi Bar", "Cafe 21", "Bike Rentals", "Art Gallery"};
-        String[] ratings = {"4/5", "5/5", "4/5", "3/5", "5/5"};
-        String[] locations = {"New York", "New York", "New York", "New York", "New York"};
-
-        for (int i = 0; i < names.length; i++) {
-            addResultCard(names[i], ratings[i], locations[i]);
-        }
+        getLocations(container);
 
         return rootView;
+    }
+
+    private void getLocations(ViewGroup container){
+        SharedPreferences prefs = requireActivity().getSharedPreferences("user_prefs", Context.MODE_PRIVATE);
+        String location = prefs.getString("location", null);
+
+        // Google Places API test (optional)
+        String apiKey = BuildConfig.GROUP_PROJECT_GOOGLE_API_KEY;
+        Places.initializeWithNewPlacesApiEnabled(container.getContext(), apiKey);
+        PlacesClient placesClient = Places.createClient(container.getContext());
+
+        final List<Place.Field> placeFields = Arrays.asList(Place.Field.DISPLAY_NAME, Place.Field.FORMATTED_ADDRESS, Place.Field.RATING);
+
+        assert location != null;
+        final SearchByTextRequest searchByTextRequest = SearchByTextRequest.builder(location, placeFields)
+                .setMaxResultCount(10)
+                .build();
+
+        placesClient.searchByText(searchByTextRequest)
+                .addOnSuccessListener(response -> {
+                    List<Place> places = response.getPlaces();
+                    for (Place p: places){
+                        double r = p.getRating();
+                        String name = p.getDisplayName();
+                        String address = p.getFormattedAddress();
+                        addResultCard(name, String.valueOf(r), address);
+                    }
+                });
     }
 
     // This method inflates your XML card and populates it with dynamic data

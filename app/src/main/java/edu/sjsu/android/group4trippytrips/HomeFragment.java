@@ -2,6 +2,8 @@ package edu.sjsu.android.group4trippytrips;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -60,6 +62,9 @@ public class HomeFragment extends Fragment {
 
         // Navigate to search results on "Search" button press
         submitButton.setOnClickListener(v -> {
+            EditText input = view.findViewById(R.id.searchBar);
+            SharedPreferences prefs = requireActivity().getSharedPreferences("user_prefs", Context.MODE_PRIVATE);
+            prefs.edit().putString("location", input.getText().toString()).apply();
             NavHostFragment.findNavController(HomeFragment.this)
                     .navigate(R.id.searchResultsFragment);
         });
@@ -96,26 +101,6 @@ public class HomeFragment extends Fragment {
             }
             return false;
         });
-
-        // Google Places API test (optional)
-        String apiKey = BuildConfig.GROUP_PROJECT_GOOGLE_API_KEY;
-        Places.initializeWithNewPlacesApiEnabled(container.getContext(), apiKey);
-        PlacesClient placesClient = Places.createClient(container.getContext());
-
-        final List<Place.Field> placeFields = Arrays.asList(Place.Field.ID, Place.Field.DISPLAY_NAME);
-
-        LatLng southWest = new LatLng(37.38816277477739, -122.08813770258874);
-        LatLng northEast = new LatLng(37.39580487866437, -122.07702325966572);
-
-        final SearchByTextRequest searchByTextRequest = SearchByTextRequest.builder("Spicy Vegetarian Food", placeFields)
-                .setMaxResultCount(10)
-                .setLocationRestriction(RectangularBounds.newInstance(southWest, northEast)).build();
-
-        placesClient.searchByText(searchByTextRequest)
-                .addOnSuccessListener(response -> {
-                    List<Place> places = response.getPlaces();
-                    // You can log or display results here if needed
-                });
 
         return view;
     }
