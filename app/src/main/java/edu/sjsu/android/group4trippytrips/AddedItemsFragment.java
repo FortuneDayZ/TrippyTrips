@@ -1,5 +1,9 @@
 package edu.sjsu.android.group4trippytrips;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,16 +23,6 @@ public class AddedItemsFragment extends Fragment {
 
     private LinearLayout cityResultsContainer;
 
-    private final String[] savedNames = {
-            "Hotel A", "Pizza Place", "Mountain Hike", "Book Café", "City Museum"
-    };
-    private final String[] savedRatings = {
-            "4/5", "5/5", "3/5", "4.5/5", "5/5"
-    };
-    private final String[] savedLocations = {
-            "New York", "Rome", "Denver", "Kyoto", "Berlin"
-    };
-
     public AddedItemsFragment() {}
 
     @Override
@@ -37,8 +31,27 @@ public class AddedItemsFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_added_items, container, false);
         cityResultsContainer = rootView.findViewById(R.id.cityResultsContainer);
 
-        for (int i = 0; i < savedNames.length; i++) {
-            addAddedCard(savedNames[i], savedRatings[i], savedLocations[i]);
+        //Setup username of current user for setting changes
+        SharedPreferences prefs = requireActivity().getSharedPreferences("user_prefs", Context.MODE_PRIVATE);
+        String username = prefs.getString("username", null);
+        Cursor cursor =  requireContext().getContentResolver().query(
+                Uri.parse("content://edu.sjsu.android.group4trippytrips.locations"),
+                null,
+                username,
+                null,
+                null
+        );
+        if(cursor != null && cursor.moveToFirst()){
+            try {
+                while (cursor.moveToNext()) {
+                    String name = cursor.getString(cursor.getColumnIndexOrThrow("name"));
+                    String address = cursor.getString(cursor.getColumnIndexOrThrow("address"));
+                    double rating = cursor.getFloat(cursor.getColumnIndexOrThrow("rating"));
+                    addAddedCard(name, String.valueOf(rating), address);
+                }
+            } finally {
+                cursor.close();
+            }
         }
 
         BottomNavigationView bottomNavigation = rootView.findViewById(R.id.bottom_navigation);
