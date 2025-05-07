@@ -3,8 +3,11 @@ package edu.sjsu.android.group4trippytrips;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +25,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.button.MaterialButton;
 
 import java.util.Calendar;
+import java.util.Objects;
 
 public class HomeFragment extends Fragment {
 
@@ -146,9 +150,31 @@ public class HomeFragment extends Fragment {
 
         editTravelers.setText("1 Traveler");
         editDate.setText(today);
+        if (!isLocationEnabled()) {
+            showSettingAlert();
+        }
+        else {
+            NavHostFragment.findNavController(HomeFragment.this)
+                    .navigate(R.id.searchResultsFragment);
+        }
+    }
 
-        NavHostFragment.findNavController(HomeFragment.this)
-                .navigate(R.id.searchResultsFragment);
+    private boolean isLocationEnabled() {
+        LocationManager manager = (LocationManager) requireContext().getSystemService(Context.LOCATION_SERVICE);
+        return manager.isProviderEnabled(LocationManager.GPS_PROVIDER) ||
+                manager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+    }
+
+    private void showSettingAlert() {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
+        alertDialog.setMessage("Please enable location service then try again.");
+        alertDialog.setPositiveButton("Enable", (dialog, which) -> {
+            Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+            requireContext().startActivity(intent);
+        });
+        alertDialog.setNegativeButton("Cancel", (dialog, which) ->
+                dialog.cancel());
+        alertDialog.show();
     }
 
     private void selectCategory(Button selectedButton) {
