@@ -78,7 +78,7 @@ public class SearchResultsFragment extends Fragment {
                 .replace("Restaurants in ", "")
                 .replace("Activities in ", "")
                 .trim();
-        searchResultsTitle.setText("Search Results for \"" + cityOnly + "\"");
+        searchResultsTitle.setText(String.format("Search Results for \"%s\"", cityOnly));
 
         // Google Places setup
         String apiKey = BuildConfig.GROUP_PROJECT_GOOGLE_API_KEY;
@@ -121,7 +121,7 @@ public class SearchResultsFragment extends Fragment {
 
         nameView.setText(name);
         locationView.setText(location);
-        ratingView.setText(rating + "/5");
+        ratingView.setText(String.format("%s/5", rating));
 
         ImageView plusIcon = cardView.findViewById(R.id.plusIcon);
         plusIcon.setOnClickListener(v -> {

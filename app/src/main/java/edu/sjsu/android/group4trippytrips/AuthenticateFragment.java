@@ -16,16 +16,12 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
-
-
-
 public class AuthenticateFragment extends Fragment {
 
     public AuthenticateFragment() {
-        // Required empty public constructor
+
     }
 
-    //TODO: deal with sign up and login
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -103,8 +99,6 @@ public class AuthenticateFragment extends Fragment {
             }
         });
 
-
         return view;
     }
-
 }

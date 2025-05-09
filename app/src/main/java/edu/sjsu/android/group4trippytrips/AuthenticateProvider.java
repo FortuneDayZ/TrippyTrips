@@ -45,7 +45,6 @@ public class AuthenticateProvider extends ContentProvider {
         return db.deleteAccount(selection);
     }
 
-    // TODO: Implement this
     @Override
     public int update(@NonNull Uri uri, ContentValues values, String selection,
                       String[] selectionArgs) {
@@ -54,7 +53,6 @@ public class AuthenticateProvider extends ContentProvider {
 
     @Override
     public String getType(@NonNull Uri uri) {
-        // at the given URI.
         throw new UnsupportedOperationException("Not yet implemented");
     }
 }

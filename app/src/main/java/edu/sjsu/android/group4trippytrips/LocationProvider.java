@@ -39,7 +39,11 @@ public class LocationProvider extends ContentProvider {
 
     @Override
     public int delete(@NonNull Uri uri, String selection, String[] selectionArgs) {
-        assert selectionArgs != null;
+//        assert selectionArgs != null;
+//        return db.deleteLocation(selection, selectionArgs[0]);
+        if (selectionArgs == null){
+            return db.deleteAllLocation(selection);
+        }
         return db.deleteLocation(selection, selectionArgs[0]);
     }
 

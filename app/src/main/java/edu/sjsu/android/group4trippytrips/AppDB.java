@@ -10,7 +10,7 @@ import androidx.annotation.Nullable;
 
 public class AppDB extends SQLiteOpenHelper {
 
-    protected static final String DATABASE_NAME = "loginDatabase";
+    protected static final String DATABASE_NAME = "appDatabase";
     protected static final int VERSION = 1;
 
     // Login Table Constants
@@ -95,6 +95,13 @@ public class AppDB extends SQLiteOpenHelper {
     public int deleteLocation(String username, String name){
         String where = "username=? AND name=?";
         String[] args = new String[] {username, name};
+        SQLiteDatabase db = getWritableDatabase();
+        return db.delete(LOCATION_TABLE_NAME, where, args);
+    }
+
+    public int deleteAllLocation(String username){
+        String where = "username=?";
+        String[] args = new String[] {username};
         SQLiteDatabase db = getWritableDatabase();
         return db.delete(LOCATION_TABLE_NAME, where, args);
     }

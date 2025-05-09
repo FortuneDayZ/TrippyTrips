@@ -25,7 +25,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.button.MaterialButton;
 
 import java.util.Calendar;
-import java.util.Objects;
 
 public class HomeFragment extends Fragment {
 
@@ -35,7 +34,7 @@ public class HomeFragment extends Fragment {
     private String selectedCategoryPrefix = "Hotels in "; // Default prefix
 
     public HomeFragment() {
-        // Required empty public constructor
+
     }
 
     @Override
@@ -148,7 +147,7 @@ public class HomeFragment extends Fragment {
                 .putString("date", today)
                 .apply();
 
-        editTravelers.setText("1 Traveler");
+        editTravelers.setText(R.string._1_traveler);
         editDate.setText(today);
         if (!isLocationEnabled()) {
             showSettingAlert();

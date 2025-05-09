@@ -1,7 +1,5 @@
 package edu.sjsu.android.group4trippytrips;
 
-import static com.google.common.reflect.Reflection.getPackageName;
-
 import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.content.Context;
@@ -21,38 +19,16 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.button.MaterialButton;
-import com.google.android.material.button.MaterialButton$InspectionCompanion;
-
-import java.util.Objects;
 
 public class SettingsFragment extends Fragment {
 
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    private String mParam1;
-    private String mParam2;
-
     public SettingsFragment() {
-        // Required empty public constructor
-    }
 
-    public static SettingsFragment newInstance(String param1, String param2) {
-        SettingsFragment fragment = new SettingsFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
@@ -145,6 +121,11 @@ public class SettingsFragment extends Fragment {
                                     username,
                                     null
                             );
+                            int locationResult = requireContext().getContentResolver().delete(
+                                    Uri.parse("content://edu.sjsu.android.group4trippytrips.locations"),
+                                    username,
+                                    null
+                            );
                             //Delete successful
                             if(result > 0) {
                                 prefs.edit().clear().apply();
@@ -171,7 +152,7 @@ public class SettingsFragment extends Fragment {
     }
 
     private void hideBottomNav() {
-        BottomNavigationView bottomNav = getActivity().findViewById(R.id.bottom_navigation);
+        BottomNavigationView bottomNav = requireActivity().findViewById(R.id.bottom_navigation);
         if (bottomNav != null) {
             bottomNav.setVisibility(View.GONE);
         }
