@@ -1,7 +1,6 @@
 package edu.sjsu.android.group4trippytrips;
 
 import android.app.AlertDialog;
-import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -14,7 +13,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.NumberPicker;
 import android.widget.Toast;
 
 import androidx.core.content.ContextCompat;
@@ -29,7 +27,6 @@ import java.util.Calendar;
 public class HomeFragment extends Fragment {
 
     private Button hotelsButton, restaurantButton, activitiesButton;
-    private EditText editTravelers, editDate;
     private MaterialButton submitButton;
     private String selectedCategoryPrefix = "Hotels in "; // Default prefix
 
@@ -45,35 +42,23 @@ public class HomeFragment extends Fragment {
         hotelsButton = view.findViewById(R.id.hotelsButton);
         restaurantButton = view.findViewById(R.id.restaurantButton);
         activitiesButton = view.findViewById(R.id.activitiesButton);
-        editTravelers = view.findViewById(R.id.editTravelers);
-        editDate = view.findViewById(R.id.editDate);
         submitButton = view.findViewById(R.id.submitButton);
 
         hotelsButton.setOnClickListener(v -> selectCategory(hotelsButton));
         restaurantButton.setOnClickListener(v -> selectCategory(restaurantButton));
         activitiesButton.setOnClickListener(v -> selectCategory(activitiesButton));
 
-        editTravelers.setOnClickListener(v -> showTravelerPicker());
-        editDate.setOnClickListener(v -> showDatePicker());
+
 
         submitButton.setOnClickListener(v -> {
             EditText input = view.findViewById(R.id.searchBar);
             String userInput = input.getText().toString().trim();
-            String travelers = editTravelers.getText().toString().trim();
-            String date = editDate.getText().toString().trim();
 
             // Check for missing fields
             StringBuilder errorMessage = new StringBuilder();
             if (userInput.isEmpty()) {
                 errorMessage.append("• Please enter a destination.\n");
             }
-            if (travelers.isEmpty()) {
-                errorMessage.append("• Please select the number of travelers.\n");
-            }
-            if (date.isEmpty()) {
-                errorMessage.append("• Please select a date.\n");
-            }
-
             if (errorMessage.length() > 0) {
                 Toast.makeText(getContext(), errorMessage.toString().trim(), Toast.LENGTH_LONG).show();
                 return;
@@ -143,12 +128,8 @@ public class HomeFragment extends Fragment {
         SharedPreferences prefs = requireActivity().getSharedPreferences("user_prefs", Context.MODE_PRIVATE);
         prefs.edit()
                 .putString("location", keyword)
-                .putString("travelers", "1 Traveler")
-                .putString("date", today)
                 .apply();
 
-        editTravelers.setText(R.string._1_traveler);
-        editDate.setText(today);
         if (!isLocationEnabled()) {
             showSettingAlert();
         }
@@ -212,36 +193,5 @@ public class HomeFragment extends Fragment {
         } else {
             return selected ? R.drawable.ic_activity_white : R.drawable.ic_activity;
         }
-    }
-
-    private void showTravelerPicker() {
-        NumberPicker numberPicker = new NumberPicker(requireContext());
-        numberPicker.setMinValue(1);
-        numberPicker.setMaxValue(8);
-        numberPicker.setWrapSelectorWheel(false);
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
-        builder.setTitle("Select Number of Travelers");
-        builder.setView(numberPicker);
-        builder.setPositiveButton("OK", (dialog, which) -> {
-            int selectedValue = numberPicker.getValue();
-            editTravelers.setText(selectedValue + " Traveler" + (selectedValue > 1 ? "s" : ""));
-        });
-        builder.setNegativeButton("Cancel", null);
-        builder.show();
-    }
-
-    private void showDatePicker() {
-        final Calendar calendar = Calendar.getInstance();
-        int year = calendar.get(Calendar.YEAR);
-        int month = calendar.get(Calendar.MONTH);
-        int day = calendar.get(Calendar.DAY_OF_MONTH);
-
-        DatePickerDialog datePickerDialog = new DatePickerDialog(requireContext(),
-                (view, selectedYear, selectedMonth, selectedDay) -> {
-                    String date = (selectedMonth + 1) + "/" + selectedDay + "/" + selectedYear;
-                    editDate.setText(date);
-                }, year, month, day);
-        datePickerDialog.show();
     }
 }
