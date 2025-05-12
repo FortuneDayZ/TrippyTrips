@@ -18,11 +18,13 @@ public class AppDB extends SQLiteOpenHelper {
     protected static final String ID = "_id";
     protected static final String USERNAME = "username";
     protected static final String PASSWORD = "password";
+    protected static final String SALT = "salt";
     private static final String LOGIN_CREATE_TABLE =
             String.format("CREATE TABLE %s (" +
                     "%s INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     "%s STRING NOT NULL, " +
-                    "%s STRING NOT NULL);", LOGIN_TABLE_NAME, ID, USERNAME, PASSWORD);
+                    "%s STRING NOT NULL, " +
+                    "%s STRING NOT NULL);", LOGIN_TABLE_NAME, ID, USERNAME, PASSWORD, SALT);
 
     // Locations Table Constants
     protected static final String LOCATION_TABLE_NAME = "locations";
@@ -63,10 +65,10 @@ public class AppDB extends SQLiteOpenHelper {
         return database.insert(LOGIN_TABLE_NAME, null, contentValues);
     }
 
-    public Cursor getAccount(String username, String password){
+    public Cursor getAccount(String username){
         SQLiteDatabase db = getWritableDatabase();
-        String where = "username=? AND password=?";
-        String[] args = new String[] { username, password };
+        String where = "username=?";
+        String[] args = new String[] {username};
         return db.query(LOGIN_TABLE_NAME, null, where, args, null, null, null);
     }
 

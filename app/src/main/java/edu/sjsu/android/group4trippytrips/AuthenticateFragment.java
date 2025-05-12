@@ -1,10 +1,12 @@
 package edu.sjsu.android.group4trippytrips;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +17,9 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
+
+import java.util.Base64;
+import java.util.Objects;
 
 public class AuthenticateFragment extends Fragment {
 
@@ -45,15 +50,31 @@ public class AuthenticateFragment extends Fragment {
                         Uri.parse("content://edu.sjsu.android.group4trippytrips.authenticate"),
                         null, // projection
                         username,
-                        new String[]{password},
+                        null,
                         null
                 )) {
                     if (cursor != null && cursor.moveToFirst()) {
-                        SharedPreferences prefs = requireActivity().getSharedPreferences("user_prefs", Context.MODE_PRIVATE);
-                        prefs.edit().putString("username", username).apply();
-                        cursor.close();
-                        NavHostFragment.findNavController(AuthenticateFragment.this)
-                                .navigate(R.id.action_loginFragment_to_homeFragment);
+                        String testPassword = "";
+                        String userHash = "";
+                        try {
+                            String salt = cursor.getString(cursor.getColumnIndexOrThrow("salt"));
+                            testPassword = cursor.getString(cursor.getColumnIndexOrThrow("password"));
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                                userHash = AuthenticateProvider.hashPassword(password.toCharArray(), Base64.getDecoder().decode(salt));
+                            }
+                        } catch (IllegalArgumentException e) {
+                            Toast.makeText(getActivity(), "Log In Failed.", Toast.LENGTH_LONG).show();
+                        }
+                        if(!userHash.equals(testPassword)){
+                            Toast.makeText(getActivity(), "Log In Failed.", Toast.LENGTH_LONG).show();
+                        }
+                        else {
+                            SharedPreferences prefs = requireActivity().getSharedPreferences("user_prefs", Context.MODE_PRIVATE);
+                            prefs.edit().putString("username", username).apply();
+                            cursor.close();
+                            NavHostFragment.findNavController(AuthenticateFragment.this)
+                                    .navigate(R.id.action_loginFragment_to_homeFragment);
+                        }
                     } else {
                         Toast.makeText(getActivity(), "Log In Failed.", Toast.LENGTH_LONG).show();
                     }
@@ -76,7 +97,7 @@ public class AuthenticateFragment extends Fragment {
                         Uri.parse("content://edu.sjsu.android.group4trippytrips.authenticate"),
                         null, // projection
                         username,
-                        new String[]{password},
+                        null,
                         null
                 )) {
                     ContentValues values = new ContentValues();

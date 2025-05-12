@@ -6,14 +6,28 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.net.Uri;
+import android.os.Build;
 
 import androidx.annotation.NonNull;
 
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.security.spec.InvalidKeySpecException;
+import java.util.Arrays;
+import java.util.Base64;
 import java.util.Objects;
+
+
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.PBEKeySpec;
+
 
 public class AuthenticateProvider extends ContentProvider {
 
     AppDB db;
+
+    private static final int ITERATIONS = 10000;
+    private static final int KEY_LENGTH = 256;
 
     @Override
     public boolean onCreate() {
@@ -23,6 +37,16 @@ public class AuthenticateProvider extends ContentProvider {
 
     @Override
     public Uri insert(@NonNull Uri uri, ContentValues values) {
+        byte[] salt = getSalt();
+        String saltS = "";
+        assert values != null;
+        char[] password = values.get("password").toString().toCharArray();
+        String hashedPassword = hashPassword(password, salt);
+        values.put("password", hashedPassword);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+           saltS = Base64.getEncoder().encodeToString(salt);
+        }
+        values.put("salt", saltS);
         long rowID = db.insertLogin(values);
         // If record is added successfully
         if (rowID > 0) {
@@ -36,8 +60,7 @@ public class AuthenticateProvider extends ContentProvider {
     @Override
     public Cursor query(@NonNull Uri uri, String[] projection, String selection,
                         String[] selectionArgs, String sortOrder) {
-        assert selectionArgs != null;
-        return db.getAccount(selection, selectionArgs[0]);
+        return db.getAccount(selection);
     }
 
     @Override
@@ -55,4 +78,27 @@ public class AuthenticateProvider extends ContentProvider {
     public String getType(@NonNull Uri uri) {
         throw new UnsupportedOperationException("Not yet implemented");
     }
+
+    public static String hashPassword(char[] password, byte[] salt) {
+        String result = "";
+        try {
+            SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSha1");
+            PBEKeySpec spec = new PBEKeySpec(password, salt, ITERATIONS, KEY_LENGTH);
+            byte[] hash = factory.generateSecret(spec).getEncoded();
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                result = Base64.getEncoder().encodeToString(hash);
+            }
+        } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
+            throw new RuntimeException("Error while hashing password", e);
+        }
+        return result;
+    }
+
+    public static byte[] getSalt() {
+        SecureRandom sr = new SecureRandom();
+        byte[] salt = new byte[16];
+        sr.nextBytes(salt);
+        return salt;
+    }
+
 }
