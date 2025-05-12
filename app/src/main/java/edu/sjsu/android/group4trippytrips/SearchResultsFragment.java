@@ -81,6 +81,10 @@ public class SearchResultsFragment extends Fragment {
         searchResultsTitle.setText(String.format("Search Results for \"%s\"", cityOnly));
 
         // Google Places setup
+        // Got it from the following website: https://developers.google.com/maps/documentation/places/android-sdk/text-search
+        // To get API Key from the local.properties file, I referred the following websites:
+        //   https://stackoverflow.com/questions/21999829/how-do-i-read-properties-defined-in-local-properties-in-build-gradle
+        //   https://stackoverflow.com/questions/74634321/fixing-the-build-type-contains-custom-buildconfig-fields-but-the-feature-is-di
         String apiKey = BuildConfig.GROUP_PROJECT_GOOGLE_API_KEY;
         Places.initializeWithNewPlacesApiEnabled(container.getContext(), apiKey);
         PlacesClient placesClient = Places.createClient(container.getContext());

@@ -1,6 +1,5 @@
 package edu.sjsu.android.group4trippytrips;
 
-import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -19,7 +18,6 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import java.util.Base64;
-import java.util.Objects;
 
 public class AuthenticateFragment extends Fragment {
 

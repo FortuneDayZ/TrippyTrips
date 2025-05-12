@@ -19,6 +19,8 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.Objects;
+
 public class AddedItemsFragment extends Fragment {
 
     private LinearLayout cityResultsContainer;
@@ -60,7 +62,7 @@ public class AddedItemsFragment extends Fragment {
         bottomNavigation.setOnItemSelectedListener(item -> {
             int itemId = item.getItemId();
             NavController navController = NavHostFragment.findNavController(this);
-            if (itemId == navController.getCurrentDestination().getId()) return true;
+            if (itemId == Objects.requireNonNull(navController.getCurrentDestination()).getId()) return true;
 
             if (itemId == R.id.homeFragment) {
                 navController.navigate(R.id.homeFragment);
