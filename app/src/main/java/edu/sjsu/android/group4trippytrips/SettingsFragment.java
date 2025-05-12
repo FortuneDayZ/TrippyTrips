@@ -76,7 +76,7 @@ public class SettingsFragment extends Fragment {
             content.put("password", password);
             if(password.isEmpty())
             {
-
+                Toast.makeText(getActivity(), "New Password Needed!", Toast.LENGTH_LONG).show();
             }
             else {
                 int result = requireContext().getContentResolver().update(
@@ -112,7 +112,6 @@ public class SettingsFragment extends Fragment {
                     .setPositiveButton("Yes", (dialog, which) -> {
                         v.setEnabled(false); // Prevent double tap
                         hideBottomNav();     // Optional
-                        // TODO: delete account from database or backend if needed
 
                         if (username != null) {
                             // Now you can delete the account
@@ -127,7 +126,7 @@ public class SettingsFragment extends Fragment {
                                     null
                             );
                             //Delete successful
-                            if(result > 0) {
+                            if(result > 0 && locationResult >= 0) {
                                 prefs.edit().clear().apply();
                                 navController.navigate(R.id.action_settingsFragment_to_welcomePage);
                             }
