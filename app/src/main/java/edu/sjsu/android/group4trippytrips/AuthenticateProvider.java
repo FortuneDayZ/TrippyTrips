@@ -13,7 +13,6 @@ import androidx.annotation.NonNull;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
-import java.util.Arrays;
 import java.util.Base64;
 import java.util.Objects;
 
@@ -79,6 +78,8 @@ public class AuthenticateProvider extends ContentProvider {
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
+    // https://www.danielhugenroth.com/posts/2021_06_password_hashing_on_android/
+    // Use of simple PBKDF2WithHmacSha1 algorithm
     public static String hashPassword(char[] password, byte[] salt) {
         String result = "";
         try {
