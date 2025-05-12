@@ -70,6 +70,16 @@ public class AuthenticateProvider extends ContentProvider {
     @Override
     public int update(@NonNull Uri uri, ContentValues values, String selection,
                       String[] selectionArgs) {
+        byte[] salt = getSalt();
+        String saltS = "";
+        assert values != null;
+        char[] password = values.get("password").toString().toCharArray();
+        String hashedPassword = hashPassword(password, salt);
+        values.put("password", hashedPassword);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            saltS = Base64.getEncoder().encodeToString(salt);
+        }
+        values.put("salt", saltS);
         return db.changePassword(values, selection);
     }
 
