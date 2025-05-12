@@ -2,9 +2,9 @@
 # Group Members: Marsel Abdullin, Benny Le, Aung Paing Soe
 
 ## APK: 
-### Can be found in Downloads Tab of BitBucket or https://bitbucket.org/cs175-sp25/group4trippytrips/downloads/
+### Can be found in Downloads Tab of BitBucket (Link: https://bitbucket.org/cs175-sp25/group4trippytrips/downloads/)
 
-## Backlog File: 
+## Backlog Document Link: 
 ### https://docs.google.com/spreadsheets/d/1WUWZ2d80rTCSu4X6eyREk73pf1yGLJvPD74kHoh1Bs8/edit?usp=sharing
 
 ## Final Report Link: 
