@@ -1,14 +1,129 @@
-# Trippy Trips by Group 4
-# Group Members: Marsel Abdullin, Benny Le, Aung Paing Soe
+# ✈️ TrippyTrips
 
-## APK: 
-### Can be found in Downloads Tab of BitBucket (Link: https://bitbucket.org/cs175-sp25/group4trippytrips/downloads/)
+## 🗺️ Overview
 
-## Backlog Document Link: 
-### https://docs.google.com/spreadsheets/d/1WUWZ2d80rTCSu4X6eyREk73pf1yGLJvPD74kHoh1Bs8/edit?usp=sharing
+**TrippyTrips** is an Android application designed to help users discover, search for, and save travel destinations and points of interest. The app features secure user authentication, location discovery through the Google Places API, and a polished user interface for managing favorite locations.
 
-## Final Report Link: 
-### https://docs.google.com/document/d/1ZMze2trCikpZ17f2TIXl3NhPs2JAyjbutp_lrKeAiWE/edit?usp=sharing
+---
 
-## TODO
-#Change Google API Key inside of local.properties: GROUP_PROJECT_GOOGLE_API_KEY=
+## ✨ Features
+
+- 🔐 **Secure User Authentication**
+  - User signup/login with passwords hashed using PBKDF2WithHmacSha1.
+- 📍 **Location Discovery**
+  - Search places by typing destinations.
+  - Category-based filtering (Hotels, Restaurants, Activities).
+  - One-tap quick searches like "Beaches nearby" or "Landmarks nearby".
+- 💾 **Saved Locations**
+  - Save favorite places to your list.
+  - View/manage saved locations in "Added Items".
+  - Remove saved places as needed.
+- ⚙️ **Account Management**
+  - Change password, log out, delete account.
+  - Option to uninstall app from Settings.
+- 📱 **User Interface**
+  - Bottom navigation bar for intuitive access to key sections.
+  - Cards to visually display locations and saved items.
+- 🗄️ **Local Data Storage**
+  - SQLite for storing credentials and saved places.
+  - `SharedPreferences` for session and state data.
+  - Content Providers for abstracted DB interaction.
+
+---
+
+## 🛠️ Technologies
+
+- **Language**: Java
+- **Platform**: Android SDK
+- **Database**: SQLite via `AppDB.java`
+- **Storage Layer**: `AuthenticateProvider`, `LocationProvider`
+- **Session**: `SharedPreferences`
+- **UI**: XML layouts, Material Design Components
+- **API**: Google Places API
+
+---
+
+## 🚀 Installation
+
+### 1. Clone the Project
+
+```bash
+git clone <your-repository-url>
+cd TrippyTrips
+```
+
+### 2. Open in Android Studio
+
+- Select the project directory to open in Android Studio.
+
+### 3. Set Up Google Places API Key
+
+- In your project root, create (or update) a `local.properties` file:
+  ```properties
+  GROUP_PROJECT_GOOGLE_API_KEY=YOUR_GOOGLE_PLACES_API_KEY_HERE
+  ```
+- Ensure `build.gradle` is configured to pass this key to `BuildConfig`.
+
+### 4. Build & Run
+
+- Let Android Studio sync the project and dependencies.
+- Choose an emulator or real device and click **Run**.
+
+---
+
+## 🗂️ Project Structure
+
+```
+TrippyTrips/
+├── MainActivity.java
+├── fragments/
+│   ├── WelcomePage.java
+│   ├── AuthenticateFragment.java
+│   ├── HomeFragment.java
+│   ├── SearchResultsFragment.java
+│   ├── AddedItemsFragment.java
+│   └── SettingsFragment.java
+├── db/
+│   └── AppDB.java
+├── providers/
+│   ├── AuthenticateProvider.java
+│   └── LocationProvider.java
+├── res/layout/
+├── res/navigation/
+└── build.gradle
+```
+
+---
+
+## ✅ Usage Guide
+
+1. **Start App** → Welcome Page.
+2. **Sign Up/Login** → AuthenticateFragment.
+3. **Home** → Choose a category + enter destination or use quick searches.
+4. **Search Results** → Tap ➕ to save a location.
+5. **Added Items** → View/remove saved places.
+6. **Settings** → Manage account: change password, logout, delete, uninstall.
+
+---
+
+## 🔒 Data & Security
+
+- User credentials are salted and hashed.
+- `SharedPreferences` store session data.
+- SQLite holds user and location info.
+- `AuthenticateProvider`/`LocationProvider` abstract DB interactions.
+
+---
+
+## 🛠️ Troubleshooting
+
+- **No Results**: Check internet, API key, and location permissions.
+- **Build Fails**: Ensure valid API key and Gradle sync.
+- **Crashes**: Use Logcat to trace and fix.
+- **Storage Issues**: Check ContentProvider and SQLite access.
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License — see `LICENSE.md` for details.
