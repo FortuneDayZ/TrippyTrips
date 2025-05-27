@@ -9,3 +9,6 @@
 
 ## Final Report Link: 
 ### https://docs.google.com/document/d/1ZMze2trCikpZ17f2TIXl3NhPs2JAyjbutp_lrKeAiWE/edit?usp=sharing
+
+## TODO
+#Change Google API Key inside of local.properties: GROUP_PROJECT_GOOGLE_API_KEY=
