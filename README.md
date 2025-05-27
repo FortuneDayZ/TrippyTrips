@@ -99,47 +99,57 @@ TrippyTrips/
 │   │   └── ... (other layouts)
 │   └── navigation/                      # Navigation graph for app flow
 └── build.gradle                         # Project and module level Gradle scripts
-✅ Usage
-Welcome: The app starts with a WelcomePage. Tap "Get Started".
-Authentication:
-Sign Up: If you're a new user, enter a desired username and password in the sign-up section of the AuthenticateFragment and tap "Sign Up".
-Log In: If you have an account, enter your credentials in the login section and tap "Log In".
-Home Screen: After logging in, you'll be directed to the HomeFragment.
-Select a category (Hotels, Restaurants, Activities).
-Enter a destination in the search bar and tap "Submit".
-Alternatively, use quick search options like "Beaches nearby" by tapping on the respective cards.
-Search Results: The SearchResultsFragment will display a list of places based on your query from the Google Places API.
-Each result card shows the name, rating, and location.
-Tap the plus icon on a card to add that location to your saved list.
-Added Items: Navigate to the "Added Items" tab using the bottom navigation bar to view all your saved locations.
-Tap the checkmark icon on a card to remove it from your list.
-Settings: Navigate to the "Settings" tab.
-Change your password.
-Log out of your account.
-Delete your account (this will also remove all your saved locations).
-Uninstall the app.
-🔒💾 Authentication & Data Storage
-Authentication:
-User credentials (username, hashed password, salt) are stored in the local SQLite login table, managed by AppDB.java.
-The AuthenticateProvider.java handles interactions with this table, including password hashing (PBKDF2WithHmacSha1) and salt generation during signup and verification during login.
-The logged-in user's session (username) is stored in SharedPreferences.
-Data Storage:
-Saved locations (name, address, rating, associated username) are stored in the SQLite locations table, also managed by AppDB.java.
-The LocationProvider.java facilitates adding, retrieving, and deleting these saved locations for the logged-in user.
-SharedPreferences are also used to temporarily hold search queries between HomeFragment and SearchResultsFragment and the current username.
-🛠️ Troubleshooting
-Build Issues:
-Ensure Android Studio is updated, and Gradle sync completes successfully.
-Verify that the Google Places API key is correctly added to local.properties and accessible via BuildConfig.
-No Search Results:
-Check if the device/emulator has an active internet connection.
-Ensure the Google Places API key is valid and the API is enabled in your Google Cloud Console project.
-Verify location permissions if searching for "nearby" places (the app prompts to enable location services if disabled for such searches).
-Data Not Saving/Deleting:
-Check for any errors in the Logcat related to SQLite operations or ContentProvider access.
-Ensure the ContentResolver calls in fragments (AddedItemsFragment, SearchResultsFragment, SettingsFragment) are correctly interacting with the providers.
-App Crashes:
-Examine the Logcat in Android Studio for crash reports and stack traces to identify the source of the error.
+
+## ✅ Usage
+
+1.  **Welcome**: The app starts with a `WelcomePage`. Tap "Get Started".
+2.  **Authentication**:
+    * **Sign Up**: If you're a new user, enter a desired username and password in the sign-up section of the `AuthenticateFragment` and tap "Sign Up".
+    * **Log In**: If you have an account, enter your credentials in the login section and tap "Log In".
+3.  **Home Screen**: After logging in, you'll be directed to the `HomeFragment`.
+    * Select a category (Hotels, Restaurants, Activities).
+    * Enter a destination in the search bar and tap "Submit".
+    * Alternatively, use quick search options like "Beaches nearby" by tapping on the respective cards.
+4.  **Search Results**: The `SearchResultsFragment` will display a list of places based on your query from the Google Places API.
+    * Each result card shows the name, rating, and location.
+    * Tap the plus icon on a card to add that location to your saved list.
+5.  **Added Items**: Navigate to the "Added Items" tab using the bottom navigation bar to view all your saved locations.
+    * Tap the checkmark icon on a card to remove it from your list.
+6.  **Settings**: Navigate to the "Settings" tab.
+    * Change your password.
+    * Log out of your account.
+    * Delete your account (this will also remove all your saved locations).
+    * Uninstall the app.
+
+---
+
+## 🔒💾 Authentication & Data Storage
+
+* **Authentication**:
+    * User credentials (username, hashed password, salt) are stored in the local SQLite `login` table, managed by `AppDB.java`.
+    * The `AuthenticateProvider.java` handles interactions with this table, including password hashing (PBKDF2WithHmacSha1) and salt generation during signup and verification during login.
+    * The logged-in user's session (username) is stored in `SharedPreferences`.
+* **Data Storage**:
+    * Saved locations (name, address, rating, associated username) are stored in the SQLite `locations` table, also managed by `AppDB.java`.
+    * The `LocationProvider.java` facilitates adding, retrieving, and deleting these saved locations for the logged-in user.
+    * `SharedPreferences` are also used to temporarily hold search queries between `HomeFragment` and `SearchResultsFragment` and the current username.
+
+---
+
+## 🛠️ Troubleshooting
+
+* **Build Issues**:
+    * Ensure Android Studio is updated, and Gradle sync completes successfully.
+    * Verify that the Google Places API key is correctly added to `local.properties` and accessible via `BuildConfig`.
+* **No Search Results**:
+    * Check if the device/emulator has an active internet connection.
+    * Ensure the Google Places API key is valid and the API is enabled in your Google Cloud Console project.
+    * Verify location permissions if searching for "nearby" places (the app prompts to enable location services if disabled for such searches).
+* **Data Not Saving/Deleting**:
+    * Check for any errors in the Logcat related to SQLite operations or ContentProvider access.
+    * Ensure the `ContentResolver` calls in fragments (`AddedItemsFragment`, `SearchResultsFragment`, `SettingsFragment`) are correctly interacting with the providers.
+* **App Crashes**:
+    * Examine the Logcat in Android Studio for crash reports and stack traces to identify the source of the error.
 📄 License
 (You can add your chosen license here, e.g., MIT License)
 
