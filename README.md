@@ -40,27 +40,27 @@ Shows short description of the app.
 ### 2. Login & Sign Up Screen
 Users can log in or create an account using a simple and intuitive form layout.
 
-![Image Alt](https://github.com/FortuneDayZ/TrippyTrips/blob/main/Screenshots/Login.jpg?raw=true)
+<img src="https://github.com/FortuneDayZ/TrippyTrips/blob/main/Screenshots/Login.jpg?raw=true" width="250" />
 
 ### 3. Category Search and Location Search
 Main navigation screen where users can search and browse by category such as Hotels, Dining, and Activities.
 
-![Image Alt](https://github.com/FortuneDayZ/TrippyTrips/blob/main/Screenshots/Search.jpg?raw=true)
+<img src="https://github.com/FortuneDayZ/TrippyTrips/blob/main/Screenshots/Search.jpg?raw=true" width="250" />
 
 ### 4. Search Results Screen
 Displays a list of relevant places based on user queries, with ratings and add-to-saved buttons.
 
-![Image Alt](https://github.com/FortuneDayZ/TrippyTrips/blob/main/Screenshots/SearchResults.jpg?raw=true)
+<img src="https://github.com/FortuneDayZ/TrippyTrips/blob/main/Screenshots/SearchResults.jpg?raw=true" width="250" />
 
 ### 5. Saved Items Screen
 Shows the list of user-saved places with key details like address and ratings.
 
-![Image Alt](https://github.com/FortuneDayZ/TrippyTrips/blob/main/Screenshots/SavedResults.jpg?raw=true)
+<img src="https://github.com/FortuneDayZ/TrippyTrips/blob/main/Screenshots/SavedResults.jpg?raw=true" width="250" />
 
 ### 6. Settings Screen
 Allows users to change their password, uninstall the app, or delete their account securely.
 
-![Image Alt](https://github.com/FortuneDayZ/TrippyTrips/blob/main/Screenshots/Settings.jpg?raw=true)
+<img src="https://github.com/FortuneDayZ/TrippyTrips/blob/main/Screenshots/Settings.jpg?raw=true" width="250" />
 
 ---
 
