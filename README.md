@@ -35,9 +35,7 @@
 ### 1. WelcomePage
 Shows short description of the app.
 
-![Image Alt](https://github.com/FortuneDayZ/TrippyTrips/blob/main/Screenshots/Welcome.jpg)
-
-
+<img src="https://github.com/FortuneDayZ/TrippyTrips/blob/main/Screenshots/Welcome.jpg?raw=true" width="250" />
 
 ### 2. Login & Sign Up Screen
 Users can log in or create an account using a simple and intuitive form layout.
