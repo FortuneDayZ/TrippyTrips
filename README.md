@@ -31,6 +31,39 @@
 
 ---
 
+## 🖼️ Screenshots
+### 1. WelcomePage
+Shows short description of the app.
+
+![Image Alt]()
+
+### 2. Login & Sign Up Screen
+Users can log in or create an account using a simple and intuitive form layout.
+
+![Image Alt]()
+
+### 3. Home & Category Selection
+Main navigation screen where users can search and browse by category such as Hotels, Dining, and Activities.
+
+![Image Alt]()
+
+### 4. Search Results Screen
+Displays a list of relevant places based on user queries, with ratings and add-to-saved buttons.
+
+![Image Alt]()
+
+### 5. Saved Items Screen
+Shows the list of user-saved places with key details like address and ratings.
+
+![Image Alt]()
+
+### 6. Settings Screen
+Allows users to change their password, uninstall the app, or delete their account securely.
+
+![Image Alt]()
+
+---
+
 ## 🛠️ Technologies
 
 - **Language**: Java
